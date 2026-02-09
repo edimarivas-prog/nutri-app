@@ -1,354 +1,146 @@
 # recetas.py
-# Base de datos ACTUALIZADA para NutriPlan Pro
-# Cantidades calculadas para ATLETAS (Alto Rendimiento)
-# Objetivo Base: ~2200-2400 kcal (Factor 1.0)
+# BASE DE DATOS MAESTRA: 100 RECETAS (NutriPlan Pro)
+# Objetivo: 2000-2200 kcal | Alto Rendimiento | Variedad Fusión
 
 RECETARIO = {
+    # ==========================================================
+    # 25 DESAYUNOS (Energía y Proteína)
+    # ==========================================================
     "Desayunos": [
-        {
-            "nombre": "Arepa Reina Pepiada (Power)",
-            "descripcion": "Relleno contundente de pollo y palta con yogurt.",
-            "macros": {"cal": 680, "prot": 45, "carb": 60, "fat": 25},
-            "ingredientes": [
-                {"item": "Harina P.A.N", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Pechuga de Pollo (Desmechada)", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Palta", "cantidad": 60, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Yogurt Griego Vakimu", "cantidad": 40, "unidad": "g", "pasillo": "🥛 Lácteos"},
-                {"item": "Cilantro/Cebolla", "cantidad": 30, "unidad": "g", "pasillo": "🥦 Verdulería"}
-            ],
-            "instrucciones": "1. Masa con sal y agua. Asar arepa grande.\n2. Mezclar pollo, palta triturada y yogurt.\n3. Rellenar a tope."
-        },
-        {
-            "nombre": "Arepa con Perico y Queso",
-            "descripcion": "El desayuno clásico venezolano completo.",
-            "macros": {"cal": 650, "prot": 35, "carb": 60, "fat": 28},
-            "ingredientes": [
-                {"item": "Harina P.A.N", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Huevos", "cantidad": 3, "unidad": "und", "pasillo": "🥛 Lácteos"},
-                {"item": "Tomate y Cebolla", "cantidad": 120, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Queso Llanero/Fresco", "cantidad": 50, "unidad": "g", "pasillo": "🧀 Charcutería"},
-                {"item": "Aceite (para sofreír)", "cantidad": 5, "unidad": "ml", "pasillo": "🥫 Abarrotes"}
-            ],
-            "instrucciones": "1. Sofreír vegetales y hacer huevos revueltos jugosos.\n2. Servir arepa con queso y perico."
-        },
-        {
-            "nombre": "Panquecas Bluhealth (Torre)",
-            "descripcion": "Alta en proteína y fibra para recuperar músculo.",
-            "macros": {"cal": 590, "prot": 42, "carb": 75, "fat": 12},
-            "ingredientes": [
-                {"item": "Avena en Hojuelas", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Scoop Proteína Bluhealth", "cantidad": 1, "unidad": "und", "pasillo": "💊 Suplementos"},
-                {"item": "Claras de Huevo", "cantidad": 4, "unidad": "und", "pasillo": "🥛 Lácteos"},
-                {"item": "Huevo Entero", "cantidad": 1, "unidad": "und", "pasillo": "🥛 Lácteos"},
-                {"item": "Plátano (Masa)", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Miel (Topping)", "cantidad": 10, "unidad": "g", "pasillo": "🥫 Abarrotes"}
-            ],
-            "instrucciones": "1. Licuar todo (avena, huevos, prote, plátano).\n2. Hacer panquecas en sartén.\n3. Comer con miel."
-        },
-        {
-            "nombre": "Sandwich Triple Vital",
-            "descripcion": "Tres pisos de pan multicereal con mucho relleno.",
-            "macros": {"cal": 620, "prot": 38, "carb": 65, "fat": 20},
-            "ingredientes": [
-                {"item": "Pan Multicereal Vital", "cantidad": 3, "unidad": "rebanadas", "pasillo": "🍞 Panadería"},
-                {"item": "Pechuga de Pollo", "cantidad": 120, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Palta", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Huevo Sancochado", "cantidad": 1, "unidad": "und", "pasillo": "🥛 Lácteos"},
-                {"item": "Tomate/Lechuga", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"}
-            ],
-            "instrucciones": "1. Tostar pan.\n2. Armar pisos: Pollo/Palta y Huevo/Tomate."
-        },
-        {
-            "nombre": "Cachapas de Avena Fit",
-            "descripcion": "Sabor a maíz dulce, usando avena para espesar.",
-            "macros": {"cal": 580, "prot": 30, "carb": 80, "fat": 18},
-            "ingredientes": [
-                {"item": "Maíz Dulce (Grano)", "cantidad": 150, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Avena", "cantidad": 40, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Huevos", "cantidad": 2, "unidad": "und", "pasillo": "🥛 Lácteos"},
-                {"item": "Queso Llanero", "cantidad": 60, "unidad": "g", "pasillo": "🧀 Charcutería"},
-                {"item": "Leche Light", "cantidad": 20, "unidad": "ml", "pasillo": "🥛 Lácteos"}
-            ],
-            "instrucciones": "1. Licuar maíz, avena, leche y huevo.\n2. Cocinar a fuego medio-bajo.\n3. Rellenar con queso."
-        },
-        {
-            "nombre": "Pan Árabe con Perico",
-            "descripcion": "Opción rápida cuando no hay tiempo de hacer arepas.",
-            "macros": {"cal": 550, "prot": 32, "carb": 60, "fat": 22},
-            "ingredientes": [
-                {"item": "Pan Árabe", "cantidad": 2, "unidad": "und", "pasillo": "🍞 Panadería"},
-                {"item": "Huevos", "cantidad": 3, "unidad": "und", "pasillo": "🥛 Lácteos"},
-                {"item": "Tomate y Cebolla", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Yogurt Griego", "cantidad": 30, "unidad": "g", "pasillo": "🥛 Lácteos"}
-            ],
-            "instrucciones": "1. Hacer huevos perico.\n2. Rellenar los panes árabes y agregar yogurt."
-        },
-        {
-            "nombre": "Bowl de Yogurt Power (Doble)",
-            "descripcion": "Sin cocinar. Mucha proteína y fruta.",
-            "macros": {"cal": 500, "prot": 35, "carb": 60, "fat": 15},
-            "ingredientes": [
-                {"item": "Yogurt Griego Vakimu", "cantidad": 250, "unidad": "g", "pasillo": "🥛 Lácteos"},
-                {"item": "Scoop Proteína Bluhealth", "cantidad": 0.5, "unidad": "und", "pasillo": "💊 Suplementos"},
-                {"item": "Avena (Cruda/Tostada)", "cantidad": 40, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Fruta (Fresa/Plátano)", "cantidad": 120, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Nueces/Pecanas", "cantidad": 15, "unidad": "g", "pasillo": "🥫 Abarrotes"}
-            ],
-            "instrucciones": "1. Mezclar yogurt con medio scoop de proteína.\n2. Agregar toppings."
-        }
+        # --- AREPAS (La Base) ---
+        {"nombre": "Arepa Reina Pepiada Power", "macros": {"cal": 650, "prot": 35, "carb": 60, "fat": 28}, "ingredientes": [{"item": "Harina P.A.N", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Pechuga de Pollo", "cantidad": 120, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Palta", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Yogurt Griego", "cantidad": 30, "unidad": "g", "pasillo": "🥛 Lácteos"}], "instrucciones": "Relleno cremoso de pollo, palta y yogurt."},
+        {"nombre": "Arepa Pelúa (Carne y Queso)", "macros": {"cal": 680, "prot": 40, "carb": 60, "fat": 25}, "ingredientes": [{"item": "Harina P.A.N", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Carne Mechada", "cantidad": 120, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Queso Amarillo/Cheddar", "cantidad": 40, "unidad": "g", "pasillo": "🧀 Charcutería"}], "instrucciones": "Carne mechada jugosa con queso rallado."},
+        {"nombre": "Arepa Catira (Pollo y Queso)", "macros": {"cal": 660, "prot": 40, "carb": 60, "fat": 24}, "ingredientes": [{"item": "Harina P.A.N", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Pechuga de Pollo", "cantidad": 120, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Queso Amarillo/Cheddar", "cantidad": 40, "unidad": "g", "pasillo": "🧀 Charcutería"}], "instrucciones": "Pollo desmechado con queso amarillo."},
+        {"nombre": "Arepa Dominó (Caraotas y Queso)", "macros": {"cal": 620, "prot": 28, "carb": 75, "fat": 18}, "ingredientes": [{"item": "Harina P.A.N", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Caraotas Negras", "cantidad": 100, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Queso Llanero", "cantidad": 50, "unidad": "g", "pasillo": "🧀 Charcutería"}], "instrucciones": "Caraotas refritas con queso blanco."},
+        {"nombre": "Arepa con Perico", "macros": {"cal": 600, "prot": 25, "carb": 60, "fat": 22}, "ingredientes": [{"item": "Harina P.A.N", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Huevos", "cantidad": 3, "unidad": "und", "pasillo": "🥛 Lácteos"}, {"item": "Tomate y Cebolla", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Huevos revueltos con vegetales."},
+        {"nombre": "Arepa Viuda con Atún", "macros": {"cal": 580, "prot": 35, "carb": 60, "fat": 15}, "ingredientes": [{"item": "Harina P.A.N", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Atún en Agua", "cantidad": 120, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Tomate y Cebolla", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Ensalada de atún dentro de la arepa."},
+        {"nombre": "Arepa de Chía y Avena", "macros": {"cal": 610, "prot": 25, "carb": 70, "fat": 18}, "ingredientes": [{"item": "Harina P.A.N", "cantidad": 60, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Avena", "cantidad": 20, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Semillas de Chía", "cantidad": 10, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Queso Paisa/Fresco", "cantidad": 50, "unidad": "g", "pasillo": "🧀 Charcutería"}], "instrucciones": "Masa enriquecida con fibra, rellena de queso."},
+        
+        # --- PANQUECAS Y DULCES ---
+        {"nombre": "Panquecas Bluhealth (Torre)", "macros": {"cal": 590, "prot": 42, "carb": 75, "fat": 12}, "ingredientes": [{"item": "Avena", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Scoop Proteína", "cantidad": 1, "unidad": "und", "pasillo": "💊 Suplementos"}, {"item": "Claras de Huevo", "cantidad": 4, "unidad": "und", "pasillo": "🥛 Lácteos"}, {"item": "Plátano", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Licuar todo y hacer torre."},
+        {"nombre": "Panquecas de Zanahoria (Carrot Cake)", "macros": {"cal": 550, "prot": 30, "carb": 70, "fat": 12}, "ingredientes": [{"item": "Avena", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Zanahoria Rallada", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Huevo", "cantidad": 2, "unidad": "und", "pasillo": "🥛 Lácteos"}, {"item": "Canela", "cantidad": 2, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Sabor a pastel de zanahoria, altas en fibra."},
+        {"nombre": "Panquecas de Espinaca (Hulk)", "macros": {"cal": 540, "prot": 32, "carb": 68, "fat": 14}, "ingredientes": [{"item": "Avena", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Espinaca", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Claras de Huevo", "cantidad": 5, "unidad": "und", "pasillo": "🥛 Lácteos"}, {"item": "Yogurt Griego (Topping)", "cantidad": 30, "unidad": "g", "pasillo": "🥛 Lácteos"}], "instrucciones": "Verdes y nutritivas."},
+        {"nombre": "Cachapas de Avena Fit", "macros": {"cal": 580, "prot": 28, "carb": 80, "fat": 18}, "ingredientes": [{"item": "Maíz Dulce", "cantidad": 150, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Avena", "cantidad": 40, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Huevo", "cantidad": 1, "unidad": "und", "pasillo": "🥛 Lácteos"}, {"item": "Queso Llanero", "cantidad": 50, "unidad": "g", "pasillo": "🧀 Charcutería"}], "instrucciones": "Sabor a maíz, espesadas con avena."},
+        {"nombre": "Tostadas Francesas Fit", "macros": {"cal": 520, "prot": 30, "carb": 65, "fat": 12}, "ingredientes": [{"item": "Pan Integral", "cantidad": 3, "unidad": "rebanadas", "pasillo": "🍞 Panadería"}, {"item": "Huevo", "cantidad": 2, "unidad": "und", "pasillo": "🥛 Lácteos"}, {"item": "Leche Light", "cantidad": 50, "unidad": "ml", "pasillo": "🥛 Lácteos"}, {"item": "Miel", "cantidad": 10, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Remojar pan en huevo/leche y dorar."},
+        {"nombre": "Avena Trasnochada (Overnight)", "macros": {"cal": 500, "prot": 30, "carb": 65, "fat": 12}, "ingredientes": [{"item": "Avena", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Leche Light", "cantidad": 150, "unidad": "ml", "pasillo": "🥛 Lácteos"}, {"item": "Scoop Proteína", "cantidad": 1, "unidad": "und", "pasillo": "💊 Suplementos"}, {"item": "Semillas de Chía", "cantidad": 10, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Dejar reposar toda la noche en refri."},
+
+        # --- HUEVOS Y PANES (Salados) ---
+        {"nombre": "Sandwich Triple Vital", "macros": {"cal": 600, "prot": 38, "carb": 65, "fat": 20}, "ingredientes": [{"item": "Pan Multicereal", "cantidad": 3, "unidad": "rebanadas", "pasillo": "🍞 Panadería"}, {"item": "Pechuga de Pollo", "cantidad": 100, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Palta", "cantidad": 40, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Huevo Duro", "cantidad": 1, "unidad": "und", "pasillo": "🥛 Lácteos"}], "instrucciones": "Torre de pan con pollo y huevo."},
+        {"nombre": "Tostadas con Palta y Salmón (Nuevo)", "macros": {"cal": 550, "prot": 30, "carb": 40, "fat": 28}, "ingredientes": [{"item": "Pan Integral", "cantidad": 2, "unidad": "rebanadas", "pasillo": "🍞 Panadería"}, {"item": "Palta", "cantidad": 60, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Salmón Ahumado/Fresco", "cantidad": 80, "unidad": "g", "pasillo": "🧀 Charcutería"}], "instrucciones": "Opción gourmet alta en Omega 3."},
+        {"nombre": "Omelette de Pavita y Queso (Nuevo)", "macros": {"cal": 450, "prot": 45, "carb": 5, "fat": 25}, "ingredientes": [{"item": "Huevos", "cantidad": 3, "unidad": "und", "pasillo": "🥛 Lácteos"}, {"item": "Jamón de Pavita", "cantidad": 80, "unidad": "g", "pasillo": "🧀 Charcutería"}, {"item": "Queso Fresco", "cantidad": 40, "unidad": "g", "pasillo": "🧀 Charcutería"}], "instrucciones": "Tortilla francesa clásica."},
+        {"nombre": "Huevos Rancheros Fit", "macros": {"cal": 480, "prot": 25, "carb": 30, "fat": 25}, "ingredientes": [{"item": "Huevos", "cantidad": 3, "unidad": "und", "pasillo": "🥛 Lácteos"}, {"item": "Tomate y Cebolla", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Frijoles Negros", "cantidad": 50, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Pan Árabe", "cantidad": 1, "unidad": "und", "pasillo": "🍞 Panadería"}], "instrucciones": "Huevos en salsa de tomate con frijoles."},
+        {"nombre": "Pan Árabe con Perico", "macros": {"cal": 500, "prot": 28, "carb": 50, "fat": 20}, "ingredientes": [{"item": "Pan Árabe", "cantidad": 2, "unidad": "und", "pasillo": "🍞 Panadería"}, {"item": "Huevos", "cantidad": 3, "unidad": "und", "pasillo": "🥛 Lácteos"}, {"item": "Tomate y Cebolla", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Relleno rápido tipo wrap."},
+        {"nombre": "Sandwich de Atún y Huevo", "macros": {"cal": 520, "prot": 40, "carb": 45, "fat": 18}, "ingredientes": [{"item": "Pan Integral", "cantidad": 2, "unidad": "rebanadas", "pasillo": "🍞 Panadería"}, {"item": "Atún en Agua", "cantidad": 100, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Huevo Duro", "cantidad": 1, "unidad": "und", "pasillo": "🥛 Lácteos"}, {"item": "Yogurt Griego", "cantidad": 20, "unidad": "g", "pasillo": "🥛 Lácteos"}], "instrucciones": "Mezcla proteica para el pan."},
+        {"nombre": "Revuelto de Champiñones (Nuevo)", "macros": {"cal": 420, "prot": 25, "carb": 10, "fat": 28}, "ingredientes": [{"item": "Huevos", "cantidad": 3, "unidad": "und", "pasillo": "🥛 Lácteos"}, {"item": "Champiñones", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Espinaca", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Aceite de Oliva", "cantidad": 5, "unidad": "ml", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Vegetales salteados con huevo."},
+        {"nombre": "Bollitos Pelones", "macros": {"cal": 550, "prot": 25, "carb": 65, "fat": 20}, "ingredientes": [{"item": "Harina P.A.N", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Queso Llanero", "cantidad": 50, "unidad": "g", "pasillo": "🧀 Charcutería"}, {"item": "Huevo", "cantidad": 1, "unidad": "und", "pasillo": "🥛 Lácteos"}], "instrucciones": "Bolitas de masa hervidas."},
+        {"nombre": "Bowl de Yogurt Power", "macros": {"cal": 450, "prot": 30, "carb": 50, "fat": 12}, "ingredientes": [{"item": "Yogurt Griego Vakimu", "cantidad": 250, "unidad": "g", "pasillo": "🥛 Lácteos"}, {"item": "Fruta", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Granola/Avena", "cantidad": 30, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Mezclar y servir."},
+        {"nombre": "Tamalito Verde (Comprado)", "macros": {"cal": 500, "prot": 15, "carb": 60, "fat": 20}, "ingredientes": [{"item": "Tamal Verde", "cantidad": 1, "unidad": "und", "pasillo": "🥦 Verdulería"}, {"item": "Salsa Criolla", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Pan Francés", "cantidad": 1, "unidad": "und", "pasillo": "🍞 Panadería"}], "instrucciones": "Desayuno criollo de domingo."},
+        {"nombre": "Salchicha Huachana con Huevo", "macros": {"cal": 600, "prot": 30, "carb": 40, "fat": 35}, "ingredientes": [{"item": "Salchicha Huachana", "cantidad": 80, "unidad": "g", "pasillo": "🧀 Charcutería"}, {"item": "Huevos", "cantidad": 2, "unidad": "und", "pasillo": "🥛 Lácteos"}, {"item": "Pan Integral", "cantidad": 2, "unidad": "rebanadas", "pasillo": "🍞 Panadería"}], "instrucciones": "Revuelto típico (controlar grasa)."},
+        {"nombre": "Batido Hipercalórico (Rápido)", "macros": {"cal": 600, "prot": 40, "carb": 80, "fat": 15}, "ingredientes": [{"item": "Scoop Proteína", "cantidad": 1, "unidad": "und", "pasillo": "💊 Suplementos"}, {"item": "Avena", "cantidad": 60, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Plátano", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Mantequilla de Maní", "cantidad": 15, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Licuar con agua o leche."}
     ],
 
+    # ==========================================================
+    # 25 ALMUERZOS (Potencia para Entrenar)
+    # ==========================================================
     "Almuerzos": [
-        {
-            "nombre": "Pollo Saltado (Full Papa)",
-            "descripcion": "Plato bandera. Cantidades generosas.",
-            "macros": {"cal": 820, "prot": 55, "carb": 90, "fat": 20},
-            "ingredientes": [
-                {"item": "Pechuga de Pollo", "cantidad": 200, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Cebolla y Tomate (Gruesos)", "cantidad": 250, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Papa Sancochada/Dorada", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Sillao/Vinagre", "cantidad": 30, "unidad": "ml", "pasillo": "🥫 Abarrotes"},
-                {"item": "Arroz Blanco/Integral", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"}
-            ],
-            "instrucciones": "1. Sellar pollo a fuego muy alto.\n2. Saltear verduras (poco tiempo).\n3. Mezclar con papas y jugo."
-        },
-        {
-            "nombre": "Pabellón Fit (Carga de Carbos)",
-            "descripcion": "Ideal para recuperar post-bici.",
-            "macros": {"cal": 880, "prot": 52, "carb": 110, "fat": 22},
-            "ingredientes": [
-                {"item": "Carne Molida Magra", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Arroz", "cantidad": 120, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Caraotas Negras", "cantidad": 150, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Plátano Maduro (Horno)", "cantidad": 120, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Pimiento/Cebolla", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"}
-            ],
-            "instrucciones": "1. Carne molida guisada.\n2. Caraotas aliñadas.\n3. Plátano al horno/airfryer."
-        },
-        {
-            "nombre": "Lentejas con Chuleta y Arroz",
-            "descripcion": "Hierro y Energía.",
-            "macros": {"cal": 800, "prot": 55, "carb": 95, "fat": 20},
-            "ingredientes": [
-                {"item": "Lentejas Guisadas", "cantidad": 250, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Chuleta Ahumada Magra", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Arroz", "cantidad": 120, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Ensalada Criolla", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"}
-            ],
-            "instrucciones": "1. Lentejas estofadas.\n2. Chuleta a la plancha (quitar grasa borde).\n3. Arroz graneado."
-        },
-        {
-            "nombre": "Seco de Pollo con Quinua",
-            "descripcion": "Guiso verde peruano.",
-            "macros": {"cal": 750, "prot": 50, "carb": 75, "fat": 25},
-            "ingredientes": [
-                {"item": "Presa de Pollo (Sin Piel)", "cantidad": 220, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Culantro Licuado", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Quinua Cocida", "cantidad": 200, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Zapallo Loche/Zanahoria", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Arvejas", "cantidad": 40, "unidad": "g", "pasillo": "🥦 Verdulería"}
-            ],
-            "instrucciones": "1. Macerar pollo.\n2. Cocinar a fuego lento con base de culantro.\n3. Servir sobre quinua."
-        },
-        {
-            "nombre": "Chaufa de Quinua y Pollo",
-            "descripcion": "Fusión Chifa ligera pero potente.",
-            "macros": {"cal": 700, "prot": 50, "carb": 70, "fat": 20},
-            "ingredientes": [
-                {"item": "Quinua Cocida", "cantidad": 250, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Pechuga de Pollo (Cubos)", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Huevos (Tortilla)", "cantidad": 2, "unidad": "und", "pasillo": "🥛 Lácteos"},
-                {"item": "Cebolla China/Pimiento", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Sillao/Kion", "cantidad": 20, "unidad": "ml", "pasillo": "🥫 Abarrotes"}
-            ],
-            "instrucciones": "1. Saltear pollo y verduras.\n2. Agregar quinua y huevos.\n3. Terminar con sillao."
-        },
-        {
-            "nombre": "Estofado de Pollo Clásico",
-            "descripcion": "Pollo jugoso con salsa roja.",
-            "macros": {"cal": 720, "prot": 48, "carb": 80, "fat": 20},
-            "ingredientes": [
-                {"item": "Presa de Pollo", "cantidad": 220, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Papa Sancochada", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Arroz", "cantidad": 100, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Zanahoria/Arvejas", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Pasta de Tomate/Hongos", "cantidad": 40, "unidad": "g", "pasillo": "🥫 Abarrotes"}
-            ],
-            "instrucciones": "1. Sellar pollo.\n2. Guisar con tomate, hongos y laurel.\n3. Agregar verduras."
-        },
-        {
-            "nombre": "Carne Molida a la Jardinera",
-            "descripcion": "Rendidora para batch cooking.",
-            "macros": {"cal": 780, "prot": 45, "carb": 85, "fat": 25},
-            "ingredientes": [
-                {"item": "Carne Molida Magra", "cantidad": 200, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Papa (Cubitos)", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Zanahoria/Vainita/Choclo", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Arroz", "cantidad": 100, "unidad": "g", "pasillo": "🥫 Abarrotes"}
-            ],
-            "instrucciones": "1. Sofreír carne.\n2. Agregar verduras y papa picada.\n3. Cocinar tapado."
-        },
-        {
-            "nombre": "Ají de Pollo (Extra Proteína)",
-            "descripcion": "Doble ración de pollo deshilachado.",
-            "macros": {"cal": 750, "prot": 55, "carb": 70, "fat": 22},
-            "ingredientes": [
-                {"item": "Pechuga de Pollo (Desmechada)", "cantidad": 200, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Crema Ají Amarillo", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Papa Sancochada", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Arroz", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Leche Light", "cantidad": 60, "unidad": "ml", "pasillo": "🥛 Lácteos"}
-            ],
-            "instrucciones": "1. Base de ají amarillo, licuar pan integral/quinua con leche.\n2. Mezclar con pollo."
-        },
-        {
-            "nombre": "Tallarines Rojos con Pollo",
-            "descripcion": "Pasta con salsa de tomate y pollo.",
-            "macros": {"cal": 800, "prot": 50, "carb": 100, "fat": 18},
-            "ingredientes": [
-                {"item": "Fideos/Spaghetti", "cantidad": 120, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Presa de Pollo", "cantidad": 200, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Salsa de Tomate (Zanahoria/Hongo)", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Queso Parmesano (Opcional)", "cantidad": 10, "unidad": "g", "pasillo": "🧀 Charcutería"}
-            ],
-            "instrucciones": "1. Licuar zanahoria cocida con tomate para la salsa.\n2. Guisar pollo en la salsa.\n3. Mezclar con pasta."
-        },
-        {
-            "nombre": "Aguadito de Pollo Espeso",
-            "descripcion": "Con mucho arroz y papa amarilla.",
-            "macros": {"cal": 700, "prot": 45, "carb": 80, "fat": 18},
-            "ingredientes": [
-                {"item": "Presa de Pollo", "cantidad": 200, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Arroz", "cantidad": 100, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Papa Amarilla", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Culantro/Verduras", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"}
-            ],
-            "instrucciones": "1. Hervir todo junto hasta que espese."
-        }
+        # --- POLLO ---
+        {"nombre": "Pollo Saltado (Full Papa)", "macros": {"cal": 820, "prot": 55, "carb": 90, "fat": 20}, "ingredientes": [{"item": "Pechuga de Pollo", "cantidad": 200, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Papa Sancochada", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Cebolla y Tomate", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Arroz", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Salteado al wok."},
+        {"nombre": "Arroz con Pollo Peruano", "macros": {"cal": 850, "prot": 50, "carb": 100, "fat": 22}, "ingredientes": [{"item": "Presa de Pollo", "cantidad": 220, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Arroz", "cantidad": 150, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Culantro", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Zanahoria/Arvejas", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Arroz verde cocido con el pollo."},
+        {"nombre": "Ají de Pollo (Doble Prote)", "macros": {"cal": 750, "prot": 60, "carb": 70, "fat": 22}, "ingredientes": [{"item": "Pechuga de Pollo", "cantidad": 220, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Crema Ají Amarillo", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Papa", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Leche Light", "cantidad": 50, "unidad": "ml", "pasillo": "🥛 Lácteos"}], "instrucciones": "Pollo deshilachado en crema."},
+        {"nombre": "Estofado de Pollo", "macros": {"cal": 720, "prot": 48, "carb": 80, "fat": 20}, "ingredientes": [{"item": "Presa de Pollo", "cantidad": 220, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Papa", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Salsa de Tomate", "cantidad": 50, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Guiso rojo clásico."},
+        {"nombre": "Seco de Pollo con Quinua", "macros": {"cal": 750, "prot": 50, "carb": 75, "fat": 25}, "ingredientes": [{"item": "Presa de Pollo", "cantidad": 220, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Culantro", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Quinua Cocida", "cantidad": 200, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Guiso verde con quinua."},
+        {"nombre": "Chaufa de Quinua y Pollo", "macros": {"cal": 700, "prot": 50, "carb": 70, "fat": 20}, "ingredientes": [{"item": "Quinua Cocida", "cantidad": 250, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Pechuga de Pollo", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Huevos", "cantidad": 2, "unidad": "und", "pasillo": "🥛 Lácteos"}], "instrucciones": "Estilo chino."},
+        {"nombre": "Milanesa de Pollo al Horno", "macros": {"cal": 650, "prot": 50, "carb": 60, "fat": 18}, "ingredientes": [{"item": "Pechuga de Pollo", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Pan Rallado/Avena", "cantidad": 30, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Puré de Papa", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Empanizar y hornear. Servir con puré."},
+
+        # --- CARNE DE RES ---
+        {"nombre": "Pabellón Fit (Carga)", "macros": {"cal": 880, "prot": 55, "carb": 110, "fat": 22}, "ingredientes": [{"item": "Carne Mechada", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Arroz", "cantidad": 120, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Caraotas Negras", "cantidad": 150, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Plátano Maduro", "cantidad": 120, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "El plato completo."},
+        {"nombre": "Lomo Saltado (Bistec)", "macros": {"cal": 800, "prot": 50, "carb": 85, "fat": 25}, "ingredientes": [{"item": "Carne de Res", "cantidad": 200, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Papa Frita/Airfryer", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Arroz", "cantidad": 100, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Salteado clásico."},
+        {"nombre": "Guiso de Carne Molida", "macros": {"cal": 780, "prot": 45, "carb": 85, "fat": 25}, "ingredientes": [{"item": "Carne Molida Magra", "cantidad": 200, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Papa Picada", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Arroz", "cantidad": 100, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Con verduras picadas."},
+        {"nombre": "Seco de Carne Norteño", "macros": {"cal": 780, "prot": 50, "carb": 85, "fat": 25}, "ingredientes": [{"item": "Carne de Res", "cantidad": 200, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Culantro", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Frijoles", "cantidad": 150, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Macerar en chicha/vinagre y culantro."},
+        {"nombre": "Olluquito con Carne", "macros": {"cal": 600, "prot": 45, "carb": 65, "fat": 15}, "ingredientes": [{"item": "Olluco", "cantidad": 250, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Carne de Res", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Arroz", "cantidad": 100, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Guiso andino ligero."},
+        {"nombre": "Bistec a lo Pobre (Fit)", "macros": {"cal": 850, "prot": 60, "carb": 80, "fat": 30}, "ingredientes": [{"item": "Bistec de Res", "cantidad": 200, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Huevo", "cantidad": 2, "unidad": "und", "pasillo": "🥛 Lácteos"}, {"item": "Arroz", "cantidad": 100, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Plátano", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Plancha y horno, evitar fritura profunda."},
+        {"nombre": "Pastel de Plátano (Venezolano)", "macros": {"cal": 780, "prot": 45, "carb": 100, "fat": 22}, "ingredientes": [{"item": "Plátano Maduro", "cantidad": 250, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Carne Molida Magra", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Queso Mozzarella", "cantidad": 60, "unidad": "g", "pasillo": "🧀 Charcutería"}], "instrucciones": "Lasaña de plátano."},
+
+        # --- CERDO Y PESCADO ---
+        {"nombre": "Lentejas con Chuleta", "macros": {"cal": 800, "prot": 55, "carb": 95, "fat": 20}, "ingredientes": [{"item": "Lentejas Guisadas", "cantidad": 250, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Chuleta Ahumada", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Arroz", "cantidad": 120, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Combinación alta en hierro."},
+        {"nombre": "Adobo de Cerdo", "macros": {"cal": 750, "prot": 50, "carb": 80, "fat": 25}, "ingredientes": [{"item": "Lomo de Cerdo", "cantidad": 200, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Ají Panca", "cantidad": 30, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Camote", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Macerar y guisar."},
+        {"nombre": "Carapulcra de Chancho", "macros": {"cal": 800, "prot": 45, "carb": 90, "fat": 28}, "ingredientes": [{"item": "Papa Seca", "cantidad": 100, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Cerdo Magro", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Yuca", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Guiso de papa seca."},
+        {"nombre": "Pescado Sudado (Nuevo)", "macros": {"cal": 600, "prot": 45, "carb": 60, "fat": 15}, "ingredientes": [{"item": "Filete de Pescado", "cantidad": 200, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Cebolla y Tomate", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Arroz", "cantidad": 100, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Yuca", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Al vapor con vegetales."},
+        {"nombre": "Atún Saltado (Económico)", "macros": {"cal": 650, "prot": 40, "carb": 80, "fat": 15}, "ingredientes": [{"item": "Atún en Agua", "cantidad": 180, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Cebolla y Tomate", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Papa Frita/Airfryer", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Igual que el lomo, con atún de lata."},
+        {"nombre": "Salmón al Horno con Camote (Nuevo)", "macros": {"cal": 700, "prot": 40, "carb": 60, "fat": 30}, "ingredientes": [{"item": "Salmón", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Camote", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Espárragos/Vainitas", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Fuente de grasas buenas."},
+
+        # --- VEGETARIANO/MIXTO ---
+        {"nombre": "Garbanzos con Acelga y Chorizo (Nuevo)", "macros": {"cal": 750, "prot": 40, "carb": 90, "fat": 25}, "ingredientes": [{"item": "Garbanzos", "cantidad": 200, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Acelga", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Chorizo (Sabor)", "cantidad": 50, "unidad": "g", "pasillo": "🧀 Charcutería"}, {"item": "Arroz", "cantidad": 100, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Potaje español adaptado."},
+        {"nombre": "Tallarines Verdes con Huevo y Queso", "macros": {"cal": 700, "prot": 30, "carb": 90, "fat": 25}, "ingredientes": [{"item": "Fideos/Spaghetti", "cantidad": 150, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Espinaca/Albahaca", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Queso Fresco", "cantidad": 80, "unidad": "g", "pasillo": "🧀 Charcutería"}, {"item": "Huevo Frito", "cantidad": 2, "unidad": "und", "pasillo": "🥛 Lácteos"}], "instrucciones": "Opción sin carne."},
+        {"nombre": "Caigua Rellena", "macros": {"cal": 600, "prot": 35, "carb": 60, "fat": 20}, "ingredientes": [{"item": "Caigua", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Carne Molida Magra", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Arroz", "cantidad": 100, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Guiso ligero."},
+        {"nombre": "Locro de Zapallo", "macros": {"cal": 650, "prot": 30, "carb": 80, "fat": 25}, "ingredientes": [{"item": "Zapallo Macre", "cantidad": 350, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Papa", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Queso Fresco", "cantidad": 80, "unidad": "g", "pasillo": "🧀 Charcutería"}, {"item": "Arroz", "cantidad": 100, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Cremoso con leche y queso."},
+        {"nombre": "Pasta Bolognese de Pavo (Nuevo)", "macros": {"cal": 700, "prot": 45, "carb": 90, "fat": 15}, "ingredientes": [{"item": "Fideos/Spaghetti", "cantidad": 150, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Carne Molida de Pavo", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Salsa de Tomate", "cantidad": 100, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Más magra que la res."}
     ],
 
+    # ==========================================================
+    # 25 CENAS (Recuperación Nocturna)
+    # ==========================================================
     "Cenas": [
-        {
-            "nombre": "Crema de Zapallo con Pollo (XL)",
-            "descripcion": "Porción grande de pollo para no perder masa.",
-            "macros": {"cal": 500, "prot": 45, "carb": 40, "fat": 12},
-            "ingredientes": [
-                {"item": "Zapallo Macre", "cantidad": 350, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Pechuga de Pollo", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Papa Amarilla", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Leche Light", "cantidad": 50, "unidad": "ml", "pasillo": "🥛 Lácteos"},
-                {"item": "Queso Fresco", "cantidad": 30, "unidad": "g", "pasillo": "🧀 Charcutería"}
-            ],
-            "instrucciones": "1. Crema espesa con leche.\n2. Servir con pollo deshilachado y cubos de queso."
-        },
-        {
-            "nombre": "Ensalada de Atún (2 Latas)",
-            "descripcion": "Cena alta en proteína, sin cocinar.",
-            "macros": {"cal": 550, "prot": 55, "carb": 25, "fat": 22},
-            "ingredientes": [
-                {"item": "Atún en Agua", "cantidad": 240, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Palta", "cantidad": 60, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Choclo Desgranado", "cantidad": 60, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Mix Lechugas/Tomate", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Yogurt Griego", "cantidad": 40, "unidad": "g", "pasillo": "🥛 Lácteos"}
-            ],
-            "instrucciones": "1. Usar aprox 1.5 a 2 latas de atún por persona.\n2. Mezclar todo."
-        },
-        {
-            "nombre": "Tortilla de Espinaca Power",
-            "descripcion": "Muchos huevos y queso.",
-            "macros": {"cal": 480, "prot": 38, "carb": 10, "fat": 30},
-            "ingredientes": [
-                {"item": "Huevos Enteros", "cantidad": 3, "unidad": "und", "pasillo": "🥛 Lácteos"},
-                {"item": "Claras de Huevo", "cantidad": 2, "unidad": "und", "pasillo": "🥛 Lácteos"},
-                {"item": "Espinaca", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Queso Fresco", "cantidad": 50, "unidad": "g", "pasillo": "🧀 Charcutería"}
-            ],
-            "instrucciones": "1. Saltear espinaca.\n2. Batir huevos, mezclar y cuajar."
-        },
-        {
-            "nombre": "Sopa de Menudencias (Con Fideos)",
-            "descripcion": "Recuperación y colágeno.",
-            "macros": {"cal": 500, "prot": 40, "carb": 45, "fat": 15},
-            "ingredientes": [
-                {"item": "Menudencia (Hígado/Molleja)", "cantidad": 200, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Fideos Cabello Ángel", "cantidad": 50, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Zapallo/Verduras", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Papa Amarilla", "cantidad": 60, "unidad": "g", "pasillo": "🥦 Verdulería"}
-            ],
-            "instrucciones": "1. Hervir menudencias.\n2. Agregar verduras y fideo."
-        },
-        {
-            "nombre": "Hamburguesa al Plato",
-            "descripcion": "Carne casera con huevo montado.",
-            "macros": {"cal": 580, "prot": 48, "carb": 15, "fat": 32},
-            "ingredientes": [
-                {"item": "Carne Molida Magra", "cantidad": 200, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Huevo (Frito/Plancha)", "cantidad": 1, "unidad": "und", "pasillo": "🥛 Lácteos"},
-                {"item": "Ensalada Fresca", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Palta", "cantidad": 40, "unidad": "g", "pasillo": "🥦 Verdulería"}
-            ],
-            "instrucciones": "1. Aliñar carne y hacer hamburguesa gruesa.\n2. Servir con huevo encima."
-        },
-        {
-            "nombre": "Pizza Pan Árabe (Doble)",
-            "descripcion": "Dos pizzas personales.",
-            "macros": {"cal": 550, "prot": 35, "carb": 60, "fat": 18},
-            "ingredientes": [
-                {"item": "Pan Árabe", "cantidad": 2, "unidad": "und", "pasillo": "🍞 Panadería"},
-                {"item": "Queso Mozzarella/Fresco", "cantidad": 60, "unidad": "g", "pasillo": "🧀 Charcutería"},
-                {"item": "Jamón de Pavo", "cantidad": 50, "unidad": "g", "pasillo": "🧀 Charcutería"},
-                {"item": "Pasta de Tomate", "cantidad": 30, "unidad": "g", "pasillo": "🥫 Abarrotes"}
-            ],
-            "instrucciones": "1. Armar pizzas.\n2. Calentar en sartén tapada."
-        },
-        {
-            "nombre": "Chaufa de Quinua (Cena)",
-            "descripcion": "Versión ligera del almuerzo.",
-            "macros": {"cal": 520, "prot": 40, "carb": 50, "fat": 16},
-            "ingredientes": [
-                {"item": "Quinua Cocida", "cantidad": 150, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Pechuga de Pollo", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Huevo", "cantidad": 1, "unidad": "und", "pasillo": "🥛 Lácteos"},
-                {"item": "Verduras Chinas", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"}
-            ],
-            "instrucciones": "1. Saltear todo rápido."
-        },
-        {
-            "nombre": "Wrap de Lechuga (Tacos)",
-            "descripcion": "Relleno abundante de carne.",
-            "macros": {"cal": 480, "prot": 40, "carb": 20, "fat": 25},
-            "ingredientes": [
-                {"item": "Carne Molida Magra", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Lechuga Americana", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Palta", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Pico de Gallo", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"}
-            ],
-            "instrucciones": "1. Usar hojas de lechuga como tortillas.\n2. Rellenar."
-        },
-        {
-            "nombre": "Calabacines Rellenos",
-            "descripcion": "Horneados con pollo y queso.",
-            "macros": {"cal": 450, "prot": 38, "carb": 25, "fat": 20},
-            "ingredientes": [
-                {"item": "Calabacín Italiano", "cantidad": 250, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Pechuga de Pollo", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Queso Fresco/Mozzarella", "cantidad": 40, "unidad": "g", "pasillo": "🧀 Charcutería"},
-                {"item": "Choclo", "cantidad": 40, "unidad": "g", "pasillo": "🥦 Verdulería"}
-            ],
-            "instrucciones": "1. Ahuecar zapallitos.\n2. Rellenar con pollo salteado y gratinar."
-        },
-        {
-            "nombre": "Berenjenas Rellenas",
-            "descripcion": "Con carne molida.",
-            "macros": {"cal": 460, "prot": 40, "carb": 20, "fat": 22},
-            "ingredientes": [
-                {"item": "Berenjena", "cantidad": 250, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Carne Molida Magra", "cantidad": 160, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Pasta de Tomate", "cantidad": 30, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Queso Mozzarella", "cantidad": 30, "unidad": "g", "pasillo": "🧀 Charcutería"}
-            ],
-            "instrucciones": "1. Rellenar berenjenas con carne guisada.\n2. Gratinar."
-        }
+        # --- CREMAS Y SOPAS ---
+        {"nombre": "Crema de Zapallo con Pollo (XL)", "macros": {"cal": 500, "prot": 45, "carb": 40, "fat": 12}, "ingredientes": [{"item": "Zapallo Macre", "cantidad": 350, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Pechuga de Pollo", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Leche Light", "cantidad": 50, "unidad": "ml", "pasillo": "🥛 Lácteos"}], "instrucciones": "Servir con pollo deshilachado."},
+        {"nombre": "Sopa de Menudencias", "macros": {"cal": 500, "prot": 40, "carb": 45, "fat": 15}, "ingredientes": [{"item": "Menudencia", "cantidad": 200, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Fideos Cabello Ángel", "cantidad": 50, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Verduras Sopa", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Sustanciosa."},
+        {"nombre": "Crema de Espinacas y Clara", "macros": {"cal": 400, "prot": 30, "carb": 20, "fat": 15}, "ingredientes": [{"item": "Espinaca", "cantidad": 250, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Claras de Huevo", "cantidad": 4, "unidad": "und", "pasillo": "🥛 Lácteos"}, {"item": "Leche Light", "cantidad": 50, "unidad": "ml", "pasillo": "🥛 Lácteos"}], "instrucciones": "Licuar espinaca, agregar claras cocidas."},
+        {"nombre": "Dieta de Pollo", "macros": {"cal": 450, "prot": 40, "carb": 45, "fat": 10}, "ingredientes": [{"item": "Pechuga de Pollo", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Fideos Cabello Ángel", "cantidad": 40, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Papa Amarilla", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Sopa blanca ligera."},
+        {"nombre": "Crema de Zanahoria y Kion", "macros": {"cal": 420, "prot": 30, "carb": 40, "fat": 12}, "ingredientes": [{"item": "Zanahoria", "cantidad": 250, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Kion (Jengibre)", "cantidad": 10, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Pollo Desmechado", "cantidad": 120, "unidad": "g", "pasillo": "🥩 Carnicería"}], "instrucciones": "Antiinflamatoria."},
+
+        # --- ENSALADAS Y HUEVOS ---
+        {"nombre": "Ensalada de Atún Contundente", "macros": {"cal": 550, "prot": 55, "carb": 25, "fat": 22}, "ingredientes": [{"item": "Atún en Agua", "cantidad": 240, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Palta", "cantidad": 60, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Choclo", "cantidad": 60, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Dos latas de atún."},
+        {"nombre": "Tortilla de Espinaca Power", "macros": {"cal": 480, "prot": 38, "carb": 10, "fat": 30}, "ingredientes": [{"item": "Huevos", "cantidad": 3, "unidad": "und", "pasillo": "🥛 Lácteos"}, {"item": "Espinaca", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Queso Fresco", "cantidad": 50, "unidad": "g", "pasillo": "🧀 Charcutería"}], "instrucciones": "Tortilla con queso."},
+        {"nombre": "Hamburguesa al Plato", "macros": {"cal": 580, "prot": 48, "carb": 15, "fat": 32}, "ingredientes": [{"item": "Carne Molida Magra", "cantidad": 200, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Huevo Frito", "cantidad": 1, "unidad": "und", "pasillo": "🥛 Lácteos"}, {"item": "Ensalada", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Sin pan."},
+        {"nombre": "Torrejas de Coliflor", "macros": {"cal": 420, "prot": 35, "carb": 20, "fat": 18}, "ingredientes": [{"item": "Coliflor", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Huevos", "cantidad": 2, "unidad": "und", "pasillo": "🥛 Lácteos"}, {"item": "Atún en Agua", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Mezcla frita en poco aceite."},
+        {"nombre": "Ensalada César con Pollo", "macros": {"cal": 500, "prot": 45, "carb": 15, "fat": 25}, "ingredientes": [{"item": "Pechuga de Pollo", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Lechuga Romana", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Queso Parmesano", "cantidad": 20, "unidad": "g", "pasillo": "🧀 Charcutería"}, {"item": "Yogurt (Aderezo)", "cantidad": 30, "unidad": "g", "pasillo": "🥛 Lácteos"}], "instrucciones": "Aderezo de yogurt."},
+        {"nombre": "Ensalada Caprese con Pollo (Nuevo)", "macros": {"cal": 520, "prot": 45, "carb": 10, "fat": 30}, "ingredientes": [{"item": "Pechuga de Pollo", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Queso Fresco/Mozzarella", "cantidad": 80, "unidad": "g", "pasillo": "🧀 Charcutería"}, {"item": "Tomate y Albahaca", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Fresca y rápida."},
+        {"nombre": "Omelette de Champiñones", "macros": {"cal": 450, "prot": 30, "carb": 10, "fat": 28}, "ingredientes": [{"item": "Huevos", "cantidad": 3, "unidad": "und", "pasillo": "🥛 Lácteos"}, {"item": "Champiñones", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Queso Fresco", "cantidad": 40, "unidad": "g", "pasillo": "🧀 Charcutería"}], "instrucciones": "Relleno de hongos."},
+        {"nombre": "Huevos Turcos (Yogurt)", "macros": {"cal": 480, "prot": 30, "carb": 15, "fat": 30}, "ingredientes": [{"item": "Huevos Poché/Sancochados", "cantidad": 2, "unidad": "und", "pasillo": "🥛 Lácteos"}, {"item": "Yogurt Griego", "cantidad": 150, "unidad": "g", "pasillo": "🥛 Lácteos"}, {"item": "Aceite de Oliva/Pimentón", "cantidad": 10, "unidad": "ml", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Huevos sobre cama de yogurt con especias."},
+        {"nombre": "Salpicón de Pollo", "macros": {"cal": 500, "prot": 45, "carb": 30, "fat": 18}, "ingredientes": [{"item": "Pechuga de Pollo", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Verduras Cocidas (Zan/Arv)", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Palta", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Mezcla fría."},
+        {"nombre": "Ensalada Rusa con Pollo", "macros": {"cal": 480, "prot": 40, "carb": 40, "fat": 12}, "ingredientes": [{"item": "Pechuga de Pollo", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Beterraga y Papa", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Yogurt Griego", "cantidad": 40, "unidad": "g", "pasillo": "🥛 Lácteos"}], "instrucciones": "Aderezo con yogurt."},
+
+        # --- WRAPS Y RELLENOS ---
+        {"nombre": "Pizza Pan Árabe", "macros": {"cal": 550, "prot": 35, "carb": 60, "fat": 18}, "ingredientes": [{"item": "Pan Árabe", "cantidad": 2, "unidad": "und", "pasillo": "🍞 Panadería"}, {"item": "Queso Mozzarella", "cantidad": 60, "unidad": "g", "pasillo": "🧀 Charcutería"}, {"item": "Jamón de Pavo", "cantidad": 50, "unidad": "g", "pasillo": "🧀 Charcutería"}], "instrucciones": "Doble ración."},
+        {"nombre": "Wrap de Lechuga (Tacos)", "macros": {"cal": 480, "prot": 40, "carb": 20, "fat": 25}, "ingredientes": [{"item": "Carne Molida Magra", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Lechuga Americana", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Pico de Gallo", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Usar lechuga de tortilla."},
+        {"nombre": "Calabacines Rellenos", "macros": {"cal": 450, "prot": 38, "carb": 25, "fat": 20}, "ingredientes": [{"item": "Calabacín Italiano", "cantidad": 250, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Pechuga de Pollo", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Queso Fresco", "cantidad": 40, "unidad": "g", "pasillo": "🧀 Charcutería"}], "instrucciones": "Gratinados."},
+        {"nombre": "Berenjenas Rellenas", "macros": {"cal": 460, "prot": 40, "carb": 20, "fat": 22}, "ingredientes": [{"item": "Berenjena", "cantidad": 250, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Carne Molida Magra", "cantidad": 160, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Queso Mozzarella", "cantidad": 30, "unidad": "g", "pasillo": "🧀 Charcutería"}], "instrucciones": "Gratinados."},
+        {"nombre": "Chaufa de Quinua (Cena)", "macros": {"cal": 520, "prot": 40, "carb": 50, "fat": 16}, "ingredientes": [{"item": "Quinua Cocida", "cantidad": 150, "unidad": "g", "pasillo": "🥫 Abarrotes"}, {"item": "Pechuga de Pollo", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Verduras Chinas", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Wok ligero."},
+        {"nombre": "Saltado de Vainitas", "macros": {"cal": 550, "prot": 45, "carb": 40, "fat": 20}, "ingredientes": [{"item": "Carne/Pollo", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Vainitas", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Papa Frita/Airfryer", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Clásico peruano."},
+        {"nombre": "Pastel de Coliflor", "macros": {"cal": 500, "prot": 40, "carb": 20, "fat": 25}, "ingredientes": [{"item": "Coliflor", "cantidad": 250, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Carne Molida Magra", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Queso Parmesano", "cantidad": 20, "unidad": "g", "pasillo": "🧀 Charcutería"}], "instrucciones": "Como pastel de papa."},
+        {"nombre": "Spaghetti de Calabacín (Zoodles)", "macros": {"cal": 480, "prot": 40, "carb": 20, "fat": 18}, "ingredientes": [{"item": "Calabacín", "cantidad": 300, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Carne Molida (Boloñesa)", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Salsa de Tomate", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Pasta falsa."},
+        {"nombre": "Tacos de Pavo y Lechuga (Nuevo)", "macros": {"cal": 450, "prot": 45, "carb": 15, "fat": 20}, "ingredientes": [{"item": "Carne Molida de Pavo", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Lechuga", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Palta", "cantidad": 40, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Variante con pavo."},
+        {"nombre": "Pescado a la Plancha y Ensalada", "macros": {"cal": 500, "prot": 50, "carb": 15, "fat": 20}, "ingredientes": [{"item": "Filete de Pescado", "cantidad": 200, "unidad": "g", "pasillo": "🥩 Carnicería"}, {"item": "Ensalada Fresca", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Palta", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Cena más ligera."}
+    ],
+    
+    # ==========================================================
+    # 25 MERIENDAS (Para completar 100 y cubrir huecos de hambre)
+    # ==========================================================
+    "Meriendas": [
+         {"nombre": "Batido Post-Entreno", "macros": {"cal": 250}, "ingredientes": [{"item": "Scoop Proteína", "cantidad": 1, "unidad": "und", "pasillo": "💊 Suplementos"}, {"item": "Agua", "cantidad": 300, "unidad": "ml", "pasillo": "💧 Varios"}]},
+         {"nombre": "Yogurt con Almendras", "macros": {"cal": 280}, "ingredientes": [{"item": "Yogurt Griego", "cantidad": 150, "unidad": "g", "pasillo": "🥛 Lácteos"}, {"item": "Almendras", "cantidad": 15, "unidad": "g", "pasillo": "🥫 Abarrotes"}]},
+         {"nombre": "Huevo Duro (2 unid)", "macros": {"cal": 140}, "ingredientes": [{"item": "Huevos", "cantidad": 2, "unidad": "und", "pasillo": "🥛 Lácteos"}]},
+         {"nombre": "Fruta: Plátano", "macros": {"cal": 100}, "ingredientes": [{"item": "Plátano", "cantidad": 1, "unidad": "und", "pasillo": "🥦 Verdulería"}]},
+         {"nombre": "Fruta: Manzana", "macros": {"cal": 80}, "ingredientes": [{"item": "Manzana", "cantidad": 1, "unidad": "und", "pasillo": "🥦 Verdulería"}]},
+         {"nombre": "Tostada con Mantequilla Maní", "macros": {"cal": 250}, "ingredientes": [{"item": "Pan Integral", "cantidad": 1, "unidad": "rebanada", "pasillo": "🍞 Panadería"}, {"item": "Mantequilla de Maní", "cantidad": 15, "unidad": "g", "pasillo": "🥫 Abarrotes"}]},
+         {"nombre": "Gelatina Light", "macros": {"cal": 20}, "ingredientes": [{"item": "Gelatina", "cantidad": 1, "unidad": "taza", "pasillo": "🥫 Abarrotes"}]},
+         {"nombre": "Puñado de Nueces", "macros": {"cal": 180}, "ingredientes": [{"item": "Nueces", "cantidad": 30, "unidad": "g", "pasillo": "🥫 Abarrotes"}]},
+         {"nombre": "Queso Fresco (Cubo)", "macros": {"cal": 150}, "ingredientes": [{"item": "Queso Fresco", "cantidad": 50, "unidad": "g", "pasillo": "🧀 Charcutería"}]},
+         {"nombre": "Jamón de Pavo (Rollitos)", "macros": {"cal": 100}, "ingredientes": [{"item": "Jamón de Pavo", "cantidad": 100, "unidad": "g", "pasillo": "🧀 Charcutería"}]},
+         {"nombre": "Atún Solo (Lata)", "macros": {"cal": 120}, "ingredientes": [{"item": "Atún en Agua", "cantidad": 120, "unidad": "g", "pasillo": "🥫 Abarrotes"}]},
+         {"nombre": "Chocolate Negro (>70%)", "macros": {"cal": 150}, "ingredientes": [{"item": "Chocolate", "cantidad": 20, "unidad": "g", "pasillo": "🥫 Abarrotes"}]},
+         {"nombre": "Galletas de Arroz", "macros": {"cal": 100}, "ingredientes": [{"item": "Galletas Arroz", "cantidad": 3, "unidad": "und", "pasillo": "🥫 Abarrotes"}]},
+         {"nombre": "Zanahoria con Hummus (Nuevo)", "macros": {"cal": 200}, "ingredientes": [{"item": "Zanahoria", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Hummus", "cantidad": 50, "unidad": "g", "pasillo": "🥫 Abarrotes"}]},
+         {"nombre": "Aceitunas", "macros": {"cal": 100}, "ingredientes": [{"item": "Aceitunas", "cantidad": 10, "unidad": "und", "pasillo": "🥫 Abarrotes"}]},
+         {"nombre": "Café con Leche", "macros": {"cal": 80}, "ingredientes": [{"item": "Leche Light", "cantidad": 100, "unidad": "ml", "pasillo": "🥛 Lácteos"}]},
+         {"nombre": "Barrita de Proteína", "macros": {"cal": 200}, "ingredientes": [{"item": "Barra Proteica", "cantidad": 1, "unidad": "und", "pasillo": "💊 Suplementos"}]},
+         {"nombre": "Palta Sola", "macros": {"cal": 160}, "ingredientes": [{"item": "Palta", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"}]},
+         {"nombre": "Tomate Cherry", "macros": {"cal": 50}, "ingredientes": [{"item": "Tomate Cherry", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"}]},
+         {"nombre": "Sandía", "macros": {"cal": 60}, "ingredientes": [{"item": "Sandía", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"}]},
+         {"nombre": "Piña", "macros": {"cal": 80}, "ingredientes": [{"item": "Piña", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"}]},
+         {"nombre": "Avena Instantánea", "macros": {"cal": 150}, "ingredientes": [{"item": "Avena", "cantidad": 40, "unidad": "g", "pasillo": "🥫 Abarrotes"}]},
+         {"nombre": "Leche Chocolatada Light", "macros": {"cal": 150}, "ingredientes": [{"item": "Leche", "cantidad": 200, "unidad": "ml", "pasillo": "🥛 Lácteos"}, {"item": "Cacao", "cantidad": 5, "unidad": "g", "pasillo": "🥫 Abarrotes"}]},
+         {"nombre": "Pepinillo", "macros": {"cal": 30}, "ingredientes": [{"item": "Pepino", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"}]},
+         {"nombre": "Cancha Serrana (Poco)", "macros": {"cal": 150}, "ingredientes": [{"item": "Maíz Cancha", "cantidad": 30, "unidad": "g", "pasillo": "🥫 Abarrotes"}]}
     ]
 }
