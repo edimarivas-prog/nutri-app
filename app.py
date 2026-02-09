@@ -7,15 +7,23 @@ st.set_page_config(page_title="NutriApp Ven-Per", page_icon="🥑", layout="wide
 
 # --- BARRA LATERAL (DATOS) ---
 st.sidebar.header("⚙️ Tus Datos")
-peso_edimar = st.sidebar.number_input("Peso Edimar (kg)", 102.0, step=0.5)
-peso_carlos = st.sidebar.number_input("Peso Carlos (kg)", 81.0, step=0.5)
 
-# Factores de ajuste (Base 2000kcal aprox)
-# Edimar: Base 102kg | Carlos: Base 81kg
-factor_e = peso_edimar / 102.0
-factor_c = peso_carlos / 81.0
+# CORRECCIÓN: Ahora definimos min_value (mínimo) y value (valor actual) por separado
+peso_edimar = st.sidebar.number_input(
+    "Peso Edimar (kg)", 
+    min_value=60.0,   # Permite bajar hasta 60kg
+    max_value=150.0, 
+    value=102.0,      # Este es tu peso inicial
+    step=0.5
+)
 
-st.title("🥑 Planificador Semanal")
+peso_carlos = st.sidebar.number_input(
+    "Peso Carlos (kg)", 
+    min_value=60.0,   # Permite bajar hasta 60kg
+    max_value=150.0, 
+    value=81.0,       # Este es su peso inicial
+    step=0.5
+)
 
 # --- PESTAÑAS PRINCIPALES ---
 tab_plan, tab_cocina, tab_recetario = st.tabs(["📋 Planificador", "🍳 Cocina y Porciones", "📖 Recetario Paso a Paso"])
