@@ -2,150 +2,171 @@ import streamlit as st
 import pandas as pd
 from recetas import RECETARIO
 
-# --- CONFIGURACIÓN DE PÁGINA ---
-st.set_page_config(page_title="NutriApp Ven-Per", page_icon="🥑", layout="wide")
+# --- CONFIGURACIÓN ---
+st.set_page_config(page_title="NutriPlan 2.0", page_icon="🥗", layout="wide")
 
-# --- BARRA LATERAL (DATOS) ---
-st.sidebar.header("⚙️ Tus Datos")
+# --- ESTILOS CSS (Para que se vea menos 'tsco') ---
+st.markdown("""
+    <style>
+    .big-font { font-size:20px !important; font-weight: bold; }
+    .stSelectbox label { font-size: 18px; font-weight: bold; }
+    div[data-testid="stExpander"] div[role="button"] p { font-size: 1.1rem; }
+    </style>
+    """, unsafe_allow_html=True)
 
-# DATOS EDIMAR
-peso_edimar = st.sidebar.number_input(
-    "Peso Edimar (kg)", 
-    min_value=60.0, 
-    max_value=150.0, 
-    value=102.0, 
-    step=0.5
-)
+# --- DATOS USUARIO ---
+st.sidebar.title("👤 Perfil")
+peso_edimar = st.sidebar.number_input("Peso Edimar (kg)", 60.0, 150.0, 102.0, 0.5)
+peso_carlos = st.sidebar.number_input("Peso Carlos (kg)", 60.0, 150.0, 81.0, 0.5)
 
-# DATOS CARLOS
-peso_carlos = st.sidebar.number_input(
-    "Peso Carlos (kg)", 
-    min_value=60.0, 
-    max_value=150.0, 
-    value=81.0, 
-    step=0.5
-)
-
-# Factores de ajuste (Base aproximada 2000kcal)
 factor_e = peso_edimar / 102.0
 factor_c = peso_carlos / 81.0
 
-st.title("🥑 Planificador Semanal")
-
-# --- PESTAÑAS PRINCIPALES ---
-tab_plan, tab_cocina, tab_recetario = st.tabs(["📋 Planificador", "🍳 Cocina y Porciones", "📖 Recetario Paso a Paso"])
+# --- TÍTULO ---
+st.title("🥗 Planificador Inteligente")
+st.markdown("---")
 
 # ==========================================
-# 1. PESTAÑA: PLANIFICADOR (DOMINGO)
+# 1. SECCIÓN: PLANIFICACIÓN (Lógica Mejorada)
 # ==========================================
-with tab_plan:
-    st.markdown("### 1. Elige tus Almuerzos (Batch Cooking)")
-    col1, col2 = st.columns(2)
-    with col1:
-        almuerzo_3_dias = st.selectbox("Almuerzo Largo (Para 3 días):", [r['nombre'] for r in RECETARIO['Almuerzos']], index=0)
-    with col2:
-        almuerzo_2_dias = st.selectbox("Almuerzo Corto (Para 2 días):", [r['nombre'] for r in RECETARIO['Almuerzos']], index=1)
+c1, c2 = st.columns([1, 1])
 
-    st.markdown("---")
-    st.markdown("### 2. Elige Desayunos y Cenas (Día a día)")
+with c1:
+    st.markdown("### 🥘 Almuerzos (Batch Cooking)")
+    st.info("Selecciona tus 2 preparaciones de la semana.")
     
-    dias_semana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
-    
-    # Creamos diccionarios para guardar las elecciones
-    elecciones_desayuno = {}
-    elecciones_cena = {}
+    # Lógica Batch Cooking
+    almuerzo_largo = st.selectbox("🥣 Olla Grande (Lunes, Martes, Miércoles)", [r['nombre'] for r in RECETARIO['Almuerzos']], index=0)
+    almuerzo_corto = st.selectbox("🥣 Olla Pequeña (Jueves, Viernes)", [r['nombre'] for r in RECETARIO['Almuerzos']], index=1)
 
-    c1, c2 = st.columns(2)
+with c2:
+    st.markdown("### 🍳 Desayuno y 🌙 Cena")
     
-    for i, dia in enumerate(dias_semana):
-        with c1:
-            elecciones_desayuno[dia] = st.selectbox(f"Desayuno {dia}", [r['nombre'] for r in RECETARIO['Desayunos']], key=f"des_{i}")
-        with c2:
-            elecciones_cena[dia] = st.selectbox(f"Cena {dia}", [r['nombre'] for r in RECETARIO['Cenas']], key=f"cen_{i}")
+    # Lógica de Repetición (FIX DE USABILIDAD)
+    col_des, col_cen = st.columns(2)
+    
+    with col_des:
+        desayuno_base = st.selectbox("Desayuno Base", [r['nombre'] for r in RECETARIO['Desayunos']])
+        repetir_des = st.checkbox("¿Desayunar esto toda la semana?", value=True)
+    
+    with col_cen:
+        cena_base = st.selectbox("Cena Base", [r['nombre'] for r in RECETARIO['Cenas']])
+        repetir_cen = st.checkbox("¿Cenar esto toda la semana?", value=True)
+
+# --- GENERADOR DE MENÚ DIARIO (Backend) ---
+dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+menu_semanal = {"Día": [], "Desayuno": [], "Almuerzo": [], "Cena": []}
+
+for i, dia in enumerate(dias):
+    menu_semanal["Día"].append(dia)
+    
+    # Lógica Desayuno
+    if repetir_des:
+        platillo = desayuno_base
+    else:
+        platillo = st.selectbox(f"Desayuno {dia}", [r['nombre'] for r in RECETARIO['Desayunos']], key=f"d_{i}")
+    menu_semanal["Desayuno"].append(platillo)
+    
+    # Lógica Almuerzo (Batch)
+    if dia in ["Lunes", "Martes", "Miércoles"]:
+        menu_semanal["Almuerzo"].append(almuerzo_largo)
+    elif dia in ["Jueves", "Viernes"]:
+        menu_semanal["Almuerzo"].append(almuerzo_corto)
+    else:
+        menu_semanal["Almuerzo"].append("Libre / Sobras") # Sábado y Domingo
+
+    # Lógica Cena
+    if repetir_cen:
+        platillo_c = cena_base
+    else:
+        platillo_c = st.selectbox(f"Cena {dia}", [r['nombre'] for r in RECETARIO['Cenas']], key=f"c_{i}")
+    menu_semanal["Cena"].append(platillo_c)
+
+# Visualización del Calendario
+with st.expander("📅 Ver Tu Calendario Semanal Generado", expanded=True):
+    st.dataframe(pd.DataFrame(menu_semanal), use_container_width=True, hide_index=True)
+
+st.markdown("---")
 
 # ==========================================
-# 2. PESTAÑA: COCINA Y COMPRAS
+# 2. SECCIÓN: COCINA (Cantidades Totales)
 # ==========================================
+st.markdown("## 🔪 A Cocinar")
+tab_cocina, tab_compras = st.tabs(["🔥 Guía de Preparación", "🛒 Lista de Compras"])
+
 with tab_cocina:
-    st.info("Aquí ves cuánto cocinar en TOTAL (para la olla) y cuánto servir en CADA PLATO.")
-
-    # Función auxiliar para mostrar bloques de cocina
-    def mostrar_bloque_cocina(titulo, receta_nombre, dias_duracion):
-        # Buscamos la receta en todas las listas
-        todas_las_recetas = RECETARIO['Almuerzos'] + RECETARIO['Desayunos'] + RECETARIO['Cenas']
-        receta = next(r for r in todas_las_recetas if r['nombre'] == receta_nombre)
-        
-        with st.expander(f"🔥 {titulo}: {receta_nombre} ({dias_duracion} días)", expanded=True):
-            st.markdown(f"**Ingredientes Totales a Cocinar** (Suma de Edimar + Carlos por {dias_duracion} días):")
-            
-            for ing in receta['ingredientes']:
-                # Cálculos
-                qty_e = ing['cantidad'] * factor_e
-                qty_c = ing['cantidad'] * factor_c
-                total_batch = (qty_e + qty_c) * dias_duracion
-                
-                # Mostrar
-                st.write(f"- 🥘 **Olla Total:** {total_batch:.0f} {ing['unidad']} de {ing['item']}")
-                st.caption(f"   ↳ 🍽️ Al emplatar: Edimar **{qty_e:.0f}{ing['unidad']}** | Carlos **{qty_c:.0f}{ing['unidad']}**")
-
-    # MOSTRAR ALMUERZOS
-    st.subheader("🍛 Preparación de Almuerzos")
-    mostrar_bloque_cocina("Almuerzo Largo", almuerzo_3_dias, 3)
-    mostrar_bloque_cocina("Almuerzo Corto", almuerzo_2_dias, 2)
-
-    st.markdown("---")
+    col_a, col_b = st.columns(2)
     
-    # LISTA DE COMPRAS
-    st.subheader("🛒 Lista de Compras Total")
-    if st.button("Generar Lista de Supermercado"):
+    # Función para mostrar tarjeta de receta
+    def tarjeta_receta(titulo, nombre, dias_count):
+        # Buscar receta
+        pool = RECETARIO['Almuerzos'] + RECETARIO['Desayunos'] + RECETARIO['Cenas']
+        receta = next((r for r in pool if r['nombre'] == nombre), None)
+        
+        if receta:
+            st.markdown(f"### {titulo}")
+            st.markdown(f"**Plato:** {nombre}")
+            st.warning(f"⚠️ Cocinar para **{dias_count} días**")
+            
+            # Tabla de ingredientes
+            data_ing = []
+            for ing in receta['ingredientes']:
+                total_batch = (ing['cantidad'] * factor_e + ing['cantidad'] * factor_c) * dias_count
+                porcion_e = ing['cantidad'] * factor_e
+                porcion_c = ing['cantidad'] * factor_c
+                
+                data_ing.append({
+                    "Ingrediente": ing['item'],
+                    "Total Olla": f"{total_batch:.0f} {ing['unidad']}",
+                    "Plato Edimar": f"{porcion_e:.0f}",
+                    "Plato Carlos": f"{porcion_c:.0f}"
+                })
+            
+            st.table(pd.DataFrame(data_ing))
+            st.markdown(f"**📝 Pasos:** {receta.get('instrucciones', '...')}")
+            st.markdown("---")
+
+    with col_a:
+        tarjeta_receta("🥣 OLLA 1 (Lun-Mié)", almuerzo_largo, 3)
+    
+    with col_b:
+        tarjeta_receta("🥣 OLLA 2 (Jue-Vie)", almuerzo_corto, 2)
+    
+    st.info("💡 Nota: Los desayunos y cenas se cocinan al día, las porciones son individuales.")
+
+# ==========================================
+# 3. SECCIÓN: COMPRAS (Lógica Agrupada)
+# ==========================================
+with tab_compras:
+    if st.button("Generar Lista Definitiva", type="primary"):
         lista_final = {}
 
-        def sumar_al_carrito(nombre, dias):
-            todas_las_recetas = RECETARIO['Almuerzos'] + RECETARIO['Desayunos'] + RECETARIO['Cenas']
-            receta = next(r for r in todas_las_recetas if r['nombre'] == nombre)
-            
-            for ing in receta['ingredientes']:
-                qty_e = ing['cantidad'] * factor_e
-                qty_c = ing['cantidad'] * factor_c
-                total = (qty_e + qty_c) * dias
-                
-                if ing['item'] in lista_final:
-                    lista_final[ing['item']] += total
-                else:
-                    lista_final[ing['item']] = total
+        def sumar(nombre, dias):
+             # Buscar receta en todas las listas
+            pool = RECETARIO['Almuerzos'] + RECETARIO['Desayunos'] + RECETARIO['Cenas']
+            r = next((x for x in pool if x['nombre'] == nombre), None)
+            if r:
+                for ing in r['ingredientes']:
+                    total = (ing['cantidad']*factor_e + ing['cantidad']*factor_c) * dias
+                    if ing['item'] in lista_final:
+                        lista_final[ing['item']] += total
+                    else:
+                        lista_final[ing['item']] = total
 
-        # Sumamos todo
-        sumar_al_carrito(almuerzo_3_dias, 3)
-        sumar_al_carrito(almuerzo_2_dias, 2)
-        for dia in dias_semana:
-            sumar_al_carrito(elecciones_desayuno[dia], 1)
-            sumar_al_carrito(elecciones_cena[dia], 1)
+        # Procesar Almuerzos
+        sumar(almuerzo_largo, 3)
+        sumar(almuerzo_corto, 2)
+        
+        # Procesar Desayunos/Cenas (recorriendo el menú generado)
+        for d in menu_semanal["Desayuno"]:
+            sumar(d, 1)
+        for c in menu_semanal["Cena"]:
+            sumar(c, 1)
 
-        # Mostrar Tabla
-        df = pd.DataFrame(list(lista_final.items()), columns=['Ingrediente', 'Cantidad Total'])
-        # Formatear números para que no salgan decimales largos
-        df['Cantidad Total'] = df['Cantidad Total'].apply(lambda x: f"{x:.1f}")
-        st.dataframe(df, use_container_width=True)
-
-# ==========================================
-# 3. PESTAÑA: RECETARIO (CON CANTIDADES)
-# ==========================================
-with tab_recetario:
-    st.header("📖 Tu Libro de Cocina")
-    
-    filtro = st.selectbox("Ver categoría:", ["Desayunos", "Almuerzos", "Cenas"])
-    
-    for receta in RECETARIO[filtro]:
-        with st.expander(f"📌 {receta['nombre']}"):
-            st.markdown(f"_{receta['descripcion']}_")
-            
-            st.markdown("### 🧬 Ingredientes (Tus Porciones)")
-            st.info("Cantidades ajustadas a sus pesos actuales:")
-            
-            for ing in receta['ingredientes']:
-                cant_e = round(ing['cantidad'] * factor_e)
-                cant_c = round(ing['cantidad'] * factor_c)
-                st.write(f"- **{ing['item']}**: 👩 Edimar `{cant_e} {ing['unidad']}` | 👨 Carlos `{cant_c} {ing['unidad']}`")
-            
-            st.markdown("### 👨‍🍳 Instrucciones")
-            st.write(receta.get('instrucciones', 'Instrucciones pendientes.'))
+        # Mostrar bonito
+        st.success("✅ Lista generada con éxito")
+        
+        df_compras = pd.DataFrame(list(lista_final.items()), columns=["Producto", "Cantidad Total"])
+        df_compras['Cantidad Total'] = df_compras['Cantidad Total'].apply(lambda x: f"{x:.1f}")
+        
+        st.dataframe(df_compras, use_container_width=True, height=500)
