@@ -114,33 +114,34 @@ RECETARIO = {
     ],
     
     # ==========================================================
-    # 25 MERIENDAS (Para completar 100 y cubrir huecos de hambre)
+    # 25 MERIENDAS (CORREGIDAS CON DESCRIPCIÓN)
     # ==========================================================
     "Meriendas": [
-         {"nombre": "Batido Post-Entreno", "macros": {"cal": 250}, "ingredientes": [{"item": "Scoop Proteína", "cantidad": 1, "unidad": "und", "pasillo": "💊 Suplementos"}, {"item": "Agua", "cantidad": 300, "unidad": "ml", "pasillo": "💧 Varios"}]},
-         {"nombre": "Yogurt con Almendras", "macros": {"cal": 280}, "ingredientes": [{"item": "Yogurt Griego", "cantidad": 150, "unidad": "g", "pasillo": "🥛 Lácteos"}, {"item": "Almendras", "cantidad": 15, "unidad": "g", "pasillo": "🥫 Abarrotes"}]},
-         {"nombre": "Huevo Duro (2 unid)", "macros": {"cal": 140}, "ingredientes": [{"item": "Huevos", "cantidad": 2, "unidad": "und", "pasillo": "🥛 Lácteos"}]},
-         {"nombre": "Fruta: Plátano", "macros": {"cal": 100}, "ingredientes": [{"item": "Plátano", "cantidad": 1, "unidad": "und", "pasillo": "🥦 Verdulería"}]},
-         {"nombre": "Fruta: Manzana", "macros": {"cal": 80}, "ingredientes": [{"item": "Manzana", "cantidad": 1, "unidad": "und", "pasillo": "🥦 Verdulería"}]},
-         {"nombre": "Tostada con Mantequilla Maní", "macros": {"cal": 250}, "ingredientes": [{"item": "Pan Integral", "cantidad": 1, "unidad": "rebanada", "pasillo": "🍞 Panadería"}, {"item": "Mantequilla de Maní", "cantidad": 15, "unidad": "g", "pasillo": "🥫 Abarrotes"}]},
-         {"nombre": "Gelatina Light", "macros": {"cal": 20}, "ingredientes": [{"item": "Gelatina", "cantidad": 1, "unidad": "taza", "pasillo": "🥫 Abarrotes"}]},
-         {"nombre": "Puñado de Nueces", "macros": {"cal": 180}, "ingredientes": [{"item": "Nueces", "cantidad": 30, "unidad": "g", "pasillo": "🥫 Abarrotes"}]},
-         {"nombre": "Queso Fresco (Cubo)", "macros": {"cal": 150}, "ingredientes": [{"item": "Queso Fresco", "cantidad": 50, "unidad": "g", "pasillo": "🧀 Charcutería"}]},
-         {"nombre": "Jamón de Pavo (Rollitos)", "macros": {"cal": 100}, "ingredientes": [{"item": "Jamón de Pavo", "cantidad": 100, "unidad": "g", "pasillo": "🧀 Charcutería"}]},
-         {"nombre": "Atún Solo (Lata)", "macros": {"cal": 120}, "ingredientes": [{"item": "Atún en Agua", "cantidad": 120, "unidad": "g", "pasillo": "🥫 Abarrotes"}]},
-         {"nombre": "Chocolate Negro (>70%)", "macros": {"cal": 150}, "ingredientes": [{"item": "Chocolate", "cantidad": 20, "unidad": "g", "pasillo": "🥫 Abarrotes"}]},
-         {"nombre": "Galletas de Arroz", "macros": {"cal": 100}, "ingredientes": [{"item": "Galletas Arroz", "cantidad": 3, "unidad": "und", "pasillo": "🥫 Abarrotes"}]},
-         {"nombre": "Zanahoria con Hummus (Nuevo)", "macros": {"cal": 200}, "ingredientes": [{"item": "Zanahoria", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Hummus", "cantidad": 50, "unidad": "g", "pasillo": "🥫 Abarrotes"}]},
-         {"nombre": "Aceitunas", "macros": {"cal": 100}, "ingredientes": [{"item": "Aceitunas", "cantidad": 10, "unidad": "und", "pasillo": "🥫 Abarrotes"}]},
-         {"nombre": "Café con Leche", "macros": {"cal": 80}, "ingredientes": [{"item": "Leche Light", "cantidad": 100, "unidad": "ml", "pasillo": "🥛 Lácteos"}]},
-         {"nombre": "Barrita de Proteína", "macros": {"cal": 200}, "ingredientes": [{"item": "Barra Proteica", "cantidad": 1, "unidad": "und", "pasillo": "💊 Suplementos"}]},
-         {"nombre": "Palta Sola", "macros": {"cal": 160}, "ingredientes": [{"item": "Palta", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"}]},
-         {"nombre": "Tomate Cherry", "macros": {"cal": 50}, "ingredientes": [{"item": "Tomate Cherry", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"}]},
-         {"nombre": "Sandía", "macros": {"cal": 60}, "ingredientes": [{"item": "Sandía", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"}]},
-         {"nombre": "Piña", "macros": {"cal": 80}, "ingredientes": [{"item": "Piña", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"}]},
-         {"nombre": "Avena Instantánea", "macros": {"cal": 150}, "ingredientes": [{"item": "Avena", "cantidad": 40, "unidad": "g", "pasillo": "🥫 Abarrotes"}]},
-         {"nombre": "Leche Chocolatada Light", "macros": {"cal": 150}, "ingredientes": [{"item": "Leche", "cantidad": 200, "unidad": "ml", "pasillo": "🥛 Lácteos"}, {"item": "Cacao", "cantidad": 5, "unidad": "g", "pasillo": "🥫 Abarrotes"}]},
-         {"nombre": "Pepinillo", "macros": {"cal": 30}, "ingredientes": [{"item": "Pepino", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"}]},
-         {"nombre": "Cancha Serrana (Poco)", "macros": {"cal": 150}, "ingredientes": [{"item": "Maíz Cancha", "cantidad": 30, "unidad": "g", "pasillo": "🥫 Abarrotes"}]}
+         {"nombre": "Batido Post-Entreno", "descripcion": "Recuperación rápida líquida.", "macros": {"cal": 250, "prot": 25, "carb": 30, "fat": 2}, "ingredientes": [{"item": "Scoop Proteína", "cantidad": 1, "unidad": "und", "pasillo": "💊 Suplementos"}, {"item": "Agua", "cantidad": 300, "unidad": "ml", "pasillo": "💧 Varios"}], "instrucciones": "Mezclar y beber."},
+         {"nombre": "Yogurt con Almendras", "descripcion": "Grasas saludables y proteína.", "macros": {"cal": 280, "prot": 15, "carb": 10, "fat": 18}, "ingredientes": [{"item": "Yogurt Griego", "cantidad": 150, "unidad": "g", "pasillo": "🥛 Lácteos"}, {"item": "Almendras", "cantidad": 15, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Servir frío."},
+         {"nombre": "Huevo Duro (2 unid)", "descripcion": "Proteína pura portátil.", "macros": {"cal": 140, "prot": 12, "carb": 1, "fat": 10}, "ingredientes": [{"item": "Huevos", "cantidad": 2, "unidad": "und", "pasillo": "🥛 Lácteos"}], "instrucciones": "Hervir 10 min."},
+         {"nombre": "Fruta: Plátano", "descripcion": "Potasio y energía rápida.", "macros": {"cal": 100, "prot": 1, "carb": 25, "fat": 0}, "ingredientes": [{"item": "Plátano", "cantidad": 1, "unidad": "und", "pasillo": "🥦 Verdulería"}], "instrucciones": "Pelar y comer."},
+         {"nombre": "Fruta: Manzana", "descripcion": "Fibra y saciedad.", "macros": {"cal": 80, "prot": 0, "carb": 20, "fat": 0}, "ingredientes": [{"item": "Manzana", "cantidad": 1, "unidad": "und", "pasillo": "🥦 Verdulería"}], "instrucciones": "Lavar bien."},
+         {"nombre": "Tostada con Mantequilla Maní", "descripcion": "Energía densa pre-entreno.", "macros": {"cal": 250, "prot": 8, "carb": 25, "fat": 15}, "ingredientes": [{"item": "Pan Integral", "cantidad": 1, "unidad": "rebanada", "pasillo": "🍞 Panadería"}, {"item": "Mantequilla de Maní", "cantidad": 15, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Untar."},
+         {"nombre": "Gelatina Light", "descripcion": "Para la ansiedad dulce.", "macros": {"cal": 20, "prot": 2, "carb": 0, "fat": 0}, "ingredientes": [{"item": "Gelatina", "cantidad": 1, "unidad": "taza", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Comer fría."},
+         {"nombre": "Puñado de Nueces", "descripcion": "Omega 3.", "macros": {"cal": 180, "prot": 4, "carb": 4, "fat": 18}, "ingredientes": [{"item": "Nueces", "cantidad": 30, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Comer directo."},
+         {"nombre": "Queso Fresco (Cubo)", "descripcion": "Proteína de caseína.", "macros": {"cal": 150, "prot": 12, "carb": 2, "fat": 10}, "ingredientes": [{"item": "Queso Fresco", "cantidad": 50, "unidad": "g", "pasillo": "🧀 Charcutería"}], "instrucciones": "Cortar en cubos."},
+         {"nombre": "Jamón de Pavo (Rollitos)", "descripcion": "Snack cárnico ligero.", "macros": {"cal": 100, "prot": 20, "carb": 2, "fat": 2}, "ingredientes": [{"item": "Jamón de Pavo", "cantidad": 100, "unidad": "g", "pasillo": "🧀 Charcutería"}], "instrucciones": "Hacer rollitos."},
+         {"nombre": "Atún Solo (Lata)", "descripcion": "Proteína de emergencia.", "macros": {"cal": 120, "prot": 28, "carb": 0, "fat": 1}, "ingredientes": [{"item": "Atún en Agua", "cantidad": 120, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Escurrir y comer."},
+         {"nombre": "Chocolate Negro (>70%)", "descripcion": "Antioxidantes.", "macros": {"cal": 150, "prot": 2, "carb": 12, "fat": 10}, "ingredientes": [{"item": "Chocolate", "cantidad": 20, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "2 cuadritos."},
+         {"nombre": "Galletas de Arroz", "descripcion": "Crujiente bajo en calorias.", "macros": {"cal": 100, "prot": 2, "carb": 22, "fat": 1}, "ingredientes": [{"item": "Galletas Arroz", "cantidad": 3, "unidad": "und", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Comer solas o con agua."},
+         {"nombre": "Zanahoria con Hummus", "descripcion": "Dip vegetal.", "macros": {"cal": 200, "prot": 6, "carb": 25, "fat": 10}, "ingredientes": [{"item": "Zanahoria", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"}, {"item": "Hummus", "cantidad": 50, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Untar bastones."},
+         {"nombre": "Aceitunas", "descripcion": "Grasas monoinsaturadas.", "macros": {"cal": 100, "prot": 0, "carb": 2, "fat": 10}, "ingredientes": [{"item": "Aceitunas", "cantidad": 10, "unidad": "und", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Comer directo."},
+         {"nombre": "Café con Leche", "descripcion": "Energía líquida.", "macros": {"cal": 80, "prot": 8, "carb": 10, "fat": 0}, "ingredientes": [{"item": "Leche Light", "cantidad": 100, "unidad": "ml", "pasillo": "🥛 Lácteos"}], "instrucciones": "Mezclar con café."},
+         {"nombre": "Barrita de Proteína", "descripcion": "Snack procesado útil.", "macros": {"cal": 200, "prot": 20, "carb": 20, "fat": 8}, "ingredientes": [{"item": "Barra Proteica", "cantidad": 1, "unidad": "und", "pasillo": "💊 Suplementos"}], "instrucciones": "Abrir y comer."},
+         {"nombre": "Palta Sola", "descripcion": "Saciante natural.", "macros": {"cal": 160, "prot": 2, "carb": 8, "fat": 15}, "ingredientes": [{"item": "Palta", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Con sal y limón."},
+         {"nombre": "Tomate Cherry", "descripcion": "Refrescante.", "macros": {"cal": 50, "prot": 2, "carb": 10, "fat": 0}, "ingredientes": [{"item": "Tomate Cherry", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Lavar y comer."},
+         {"nombre": "Sandía", "descripcion": "Hidratación.", "macros": {"cal": 60, "prot": 1, "carb": 15, "fat": 0}, "ingredientes": [{"item": "Sandía", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Cortar en cubos."},
+         {"nombre": "Piña", "descripcion": "Digestiva.", "macros": {"cal": 80, "prot": 1, "carb": 20, "fat": 0}, "ingredientes": [{"item": "Piña", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Cortar en rodajas."},
+         {"nombre": "Avena Instantánea", "descripcion": "Carbohidrato complejo.", "macros": {"cal": 150, "prot": 5, "carb": 27, "fat": 3}, "ingredientes": [{"item": "Avena", "cantidad": 40, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Con agua caliente."},
+         {"nombre": "Leche Chocolatada Light", "descripcion": "Antojo dulce.", "macros": {"cal": 150, "prot": 8, "carb": 20, "fat": 2}, "ingredientes": [{"item": "Leche", "cantidad": 200, "unidad": "ml", "pasillo": "🥛 Lácteos"}, {"item": "Cacao", "cantidad": 5, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Mezclar bien."},
+         {"nombre": "Pepinillo", "descripcion": "Volumen sin calorías.", "macros": {"cal": 30, "prot": 1, "carb": 5, "fat": 0}, "ingredientes": [{"item": "Pepino", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"}], "instrucciones": "Con sal y limón."},
+         {"nombre": "Cancha Serrana (Poco)", "descripcion": "Toque salado crujiente.", "macros": {"cal": 150, "prot": 3, "carb": 30, "fat": 2}, "ingredientes": [{"item": "Maíz Cancha", "cantidad": 30, "unidad": "g", "pasillo": "🥫 Abarrotes"}], "instrucciones": "Tostada."}
+    ]
     ]
 }
