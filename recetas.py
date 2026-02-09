@@ -1,14 +1,13 @@
 # recetas.py
-# Base de datos de recetas para NutriPlan 2.0
-# Cantidades Base calculadas para un adulto promedio (~2000 kcal).
-# La app ajustará esto automáticamente según el peso de Edimar y Carlos.
+# Base de datos COMPLETA para NutriPlan 2.0
+# Cantidades Base calculadas para ~2000 kcal (Se ajustan solas en la app).
 
 RECETARIO = {
     "Desayunos": [
+        # --- CLÁSICOS VENEZOLANOS FIT ---
         {
             "nombre": "Arepa Reina Pepiada (Fit)",
-            "descripcion": "La clásica venezolana, pero usando yogurt griego en lugar de mayonesa para sumar proteína.",
-            "imagen": "reina_pepiada",
+            "descripcion": "Relleno cremoso usando yogurt griego en lugar de mayonesa.",
             "ingredientes": [
                 {"item": "Harina P.A.N", "cantidad": 50, "unidad": "g", "pasillo": "🥫 Abarrotes"},
                 {"item": "Pechuga Desmechada", "cantidad": 100, "unidad": "g", "pasillo": "🥩 Carnicería"},
@@ -16,303 +15,361 @@ RECETARIO = {
                 {"item": "Yogurt Griego Vakimu", "cantidad": 30, "unidad": "g", "pasillo": "🥛 Lácteos"},
                 {"item": "Cilantro/Cebolla", "cantidad": 20, "unidad": "g", "pasillo": "🥦 Verdulería"}
             ],
-            "instrucciones": "1. Mezclar harina con agua y sal, asar la arepa.\n2. Mezclar el pollo desmechado con el yogurt, la palta triturada, cilantro y cebollita picada.\n3. Rellenar."
+            "instrucciones": "1. Asar arepa.\n2. Mezclar pollo, palta triturada, yogurt y cilantro.\n3. Rellenar."
         },
         {
-            "nombre": "Perico Venezolano con Arepa",
-            "descripcion": "Huevos revueltos con tomate y cebolla, alto en saciedad.",
-            "imagen": "perico",
+            "nombre": "Arepa con Perico",
+            "descripcion": "Huevos revueltos con vegetales, alto volumen y saciedad.",
             "ingredientes": [
+                {"item": "Harina P.A.N", "cantidad": 50, "unidad": "g", "pasillo": "🥫 Abarrotes"},
                 {"item": "Huevos Enteros", "cantidad": 2, "unidad": "und", "pasillo": "🥛 Lácteos"},
-                {"item": "Claras de Huevo", "cantidad": 2, "unidad": "und", "pasillo": "🥛 Lácteos"},
-                {"item": "Tomate y Cebolla", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Harina P.A.N", "cantidad": 40, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Tomate y Cebolla", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"},
                 {"item": "Aceite de Oliva", "cantidad": 5, "unidad": "ml", "pasillo": "🥫 Abarrotes"}
             ],
-            "instrucciones": "1. Sofreír tomate y cebolla en el aceite.\n2. Agregar los huevos y claras batidos.\n3. Servir con arepa asada delgada."
+            "instrucciones": "1. Sofreír tomate y cebolla.\n2. Agregar huevos batidos con sal.\n3. Servir con arepa."
         },
         {
-            "nombre": "Panquecas de Avena y Proteína",
-            "descripcion": "Ideales para días de entrenamiento pesado.",
-            "imagen": "panquecas",
+            "nombre": "Cachapas de Avena (Sin Harina)",
+            "descripcion": "Sabor a maíz dulce pero con fibra.",
             "ingredientes": [
-                {"item": "Avena en hojuelas", "cantidad": 50, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Scoop Proteína (Bluhealth)", "cantidad": 1, "unidad": "und", "pasillo": "💊 Suplementos"},
+                {"item": "Maíz Dulce (Lata/Grano)", "cantidad": 100, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Avena en Hojuelas", "cantidad": 30, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Huevo", "cantidad": 1, "unidad": "und", "pasillo": "🥛 Lácteos"},
+                {"item": "Queso Llanero/Fresco", "cantidad": 40, "unidad": "g", "pasillo": "🧀 Charcutería"}
+            ],
+            "instrucciones": "1. Licuar maíz, avena y huevo.\n2. Cocinar en sartén como panqueca.\n3. Rellenar con queso."
+        },
+        # --- OPCIONES DULCES / RÁPIDAS ---
+        {
+            "nombre": "Panquecas Proteicas Bluhealth",
+            "descripcion": "Para días de entrenamiento de pierna.",
+            "ingredientes": [
+                {"item": "Avena", "cantidad": 40, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Scoop Proteína", "cantidad": 1, "unidad": "und", "pasillo": "💊 Suplementos"},
                 {"item": "Claras de Huevo", "cantidad": 3, "unidad": "und", "pasillo": "🥛 Lácteos"},
-                {"item": "Polvo de hornear", "cantidad": 2, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Polvo Hornear", "cantidad": 2, "unidad": "g", "pasillo": "🥫 Abarrotes"},
                 {"item": "Fresas", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"}
             ],
-            "instrucciones": "1. Licuar avena, proteína, claras y polvo de hornear.\n2. Hacer en sartén antiadherente.\n3. Servir con fresas."
+            "instrucciones": "1. Licuar todo (menos fresas).\n2. Hacer panquecas.\n3. Servir con fruta."
         },
         {
-            "nombre": "Tostadas Multicereal con Palta y Huevo",
-            "descripcion": "Desayuno rápido y equilibrado.",
-            "imagen": "tostadas",
+            "nombre": "Bowl de Yogurt Power",
+            "descripcion": "Sin cocinar, solo mezclar.",
+            "ingredientes": [
+                {"item": "Yogurt Griego Vakimu", "cantidad": 200, "unidad": "g", "pasillo": "🥛 Lácteos"},
+                {"item": "Nueces/Almendras", "cantidad": 15, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Arándanos", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Miel", "cantidad": 10, "unidad": "g", "pasillo": "🥫 Abarrotes"}
+            ],
+            "instrucciones": "1. Servir yogurt en bowl.\n2. Decorar con toppings."
+        },
+        # --- SANDWICHES / TOSTADAS ---
+        {
+            "nombre": "Tostadas Vital con Palta y Huevo",
+            "descripcion": "Clásico desayuno nutritivo.",
             "ingredientes": [
                 {"item": "Pan Multicereal Vital", "cantidad": 2, "unidad": "rebanadas", "pasillo": "🍞 Panadería"},
                 {"item": "Huevos", "cantidad": 2, "unidad": "und", "pasillo": "🥛 Lácteos"},
                 {"item": "Palta", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"},
                 {"item": "Semillas de Chía", "cantidad": 5, "unidad": "g", "pasillo": "🥫 Abarrotes"}
             ],
-            "instrucciones": "1. Tostar el pan.\n2. Hacer huevos revueltos o sancochados.\n3. Machacar la palta sobre el pan y poner el huevo encima."
+            "instrucciones": "1. Tostar pan.\n2. Poner palta machacada y huevo (sancochado o revuelto) encima."
         },
         {
             "nombre": "Sándwich de Atún Express",
-            "descripcion": "Cuando no hay tiempo de cocinar.",
-            "imagen": "sandwich_atun",
+            "descripcion": "Rápido y alto en proteína.",
             "ingredientes": [
                 {"item": "Pan Árabe / Integral", "cantidad": 2, "unidad": "und", "pasillo": "🍞 Panadería"},
                 {"item": "Atún en Agua", "cantidad": 120, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Yogurt Griego (como mayo)", "cantidad": 20, "unidad": "g", "pasillo": "🥛 Lácteos"},
+                {"item": "Yogurt Griego (Sustituye Mayo)", "cantidad": 20, "unidad": "g", "pasillo": "🥛 Lácteos"},
                 {"item": "Cebolla picada", "cantidad": 20, "unidad": "g", "pasillo": "🥦 Verdulería"}
             ],
-            "instrucciones": "1. Mezclar atún escurrido con yogurt y cebolla.\n2. Rellenar el pan."
-        },
-        {
-            "nombre": "Cachapas de Avena (Falsas Cachapas)",
-            "descripcion": "Sabor a maíz pero con fibra de la avena.",
-            "imagen": "cachapa_fit",
-            "ingredientes": [
-                {"item": "Maíz dulce (lata/grano)", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Avena", "cantidad": 30, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Huevo", "cantidad": 1, "unidad": "und", "pasillo": "🥛 Lácteos"},
-                {"item": "Queso Llanero/Fresco", "cantidad": 40, "unidad": "g", "pasillo": "🧀 Charcutería"}
-            ],
-            "instrucciones": "1. Licuar maíz, avena y huevo.\n2. Cocinar como panqueca.\n3. Rellenar con el queso."
-        },
-        {
-            "nombre": "Bowl de Yogurt Power",
-            "descripcion": "Fresco y sin cocinar.",
-            "imagen": "bowl_yogurt",
-            "ingredientes": [
-                {"item": "Yogurt Griego Vakimu", "cantidad": 200, "unidad": "g", "pasillo": "🥛 Lácteos"},
-                {"item": "Nueces/Almendras", "cantidad": 15, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Frutos rojos", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Miel", "cantidad": 10, "unidad": "g", "pasillo": "🥫 Abarrotes"}
-            ],
-            "instrucciones": "1. Servir yogurt.\n2. Agregar toppings."
+            "instrucciones": "1. Mezclar atún escurrido con yogurt y cebolla.\n2. Armar sándwich."
         }
     ],
+
     "Almuerzos": [
+        # --- CRIOLLOS PERUANOS FIT ---
         {
-            "nombre": "Pollo Saltado (Estilo Fit)",
-            "descripcion": "Menos papa, más vegetales crujientes. Usamos el wok.",
-            "imagen": "pollo_saltado",
+            "nombre": "Arroz con Pollo (Integral/Quinua)",
+            "descripcion": "Con mucho culantro y verduras.",
+            "ingredientes": [
+                {"item": "Presa de Pollo (Sin Piel)", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"},
+                {"item": "Arroz Integral / Quinua", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Culantro Licuado", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Zanahoria/Arvejas/Choclo", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Pimiento Tiras", "cantidad": 30, "unidad": "g", "pasillo": "🥦 Verdulería"}
+            ],
+            "instrucciones": "1. Sellar pollo.\n2. Sofreír culantro.\n3. Cocinar arroz/quinua en esa base con las verduras y el pollo."
+        },
+        {
+            "nombre": "Pollo Saltado (Poca Papa)",
+            "descripcion": "Full verduras al wok.",
             "ingredientes": [
                 {"item": "Pechuga de Pollo", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Cebolla Roja (Gajos)", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Cebolla Roja (Gruesa)", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"},
                 {"item": "Tomate (Gajos)", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Sillao y Vinagre", "cantidad": 20, "unidad": "ml", "pasillo": "🥫 Abarrotes"},
-                {"item": "Papa Sancochada (Dorada)", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"}
+                {"item": "Papa Sancochada (Dorada)", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Sillao y Vinagre", "cantidad": 20, "unidad": "ml", "pasillo": "🥫 Abarrotes"}
             ],
-            "instrucciones": "1. Cortar pollo en tiras y sellar a fuego muy alto.\n2. Retirar pollo, saltear cebolla y tomate (30 seg).\n3. Mezclar todo, agregar sillao/vinagre.\n4. Servir con la papa cocida aparte."
+            "instrucciones": "1. Wokear pollo a fuego alto.\n2. Saltar vegetales rápido.\n3. Mezclar."
         },
         {
-            "nombre": "Pabellón Criollo Saludable",
-            "descripcion": "Carne magra, arroz integral/quinua y plátano al horno (no frito).",
-            "imagen": "pabellon",
+            "nombre": "Carapulcra de Pollo",
+            "descripcion": "Usando pechuga o chancho magro y papa seca.",
             "ingredientes": [
-                {"item": "Carne Desmechada Magra", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Frijoles Negros (Caraotas)", "cantidad": 100, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Arroz Integral / Quinua", "cantidad": 100, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Plátano Maduro (Horno)", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Pimiento/Cebolla (Sofrito)", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"}
+                {"item": "Papa Seca (Hidratada)", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Pechuga/Chancho Magro", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"},
+                {"item": "Ají Panca", "cantidad": 20, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Maní Tostado (Poco)", "cantidad": 10, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Yuca Sancochada", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"}
             ],
-            "instrucciones": "1. Carne: Cocinar con poco aceite.\n2. Plátano: Hornear o usar Airfryer en vez de freír.\n3. Caraotas: Sin azúcar añadida."
-        },
-        {
-            "nombre": "Chaufa de Quinua y Pollo",
-            "descripcion": "Reemplazamos arroz por quinua para más fibra.",
-            "imagen": "chaufa_quinua",
-            "ingredientes": [
-                {"item": "Quinua Cocida (Graneada)", "cantidad": 150, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Pechuga de Pollo (Cubos)", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Huevos (Tortilla picada)", "cantidad": 2, "unidad": "und", "pasillo": "🥛 Lácteos"},
-                {"item": "Cebolla China (Verdeo)", "cantidad": 30, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Pimiento Rojo", "cantidad": 40, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Sillao/Kion", "cantidad": 10, "unidad": "ml", "pasillo": "🥫 Abarrotes"}
-            ],
-            "instrucciones": "1. Tener la quinua lista y fría.\n2. Saltear pollo y verduras.\n3. Agregar quinua y tortilla picada, mezclar con sillao."
-        },
-        {
-            "nombre": "Lentejas con Chuleta Ahumada",
-            "descripcion": "Plato alto en hierro. Retirar grasa visible de la chuleta.",
-            "imagen": "lentejas",
-            "ingredientes": [
-                {"item": "Lentejas Guisadas", "cantidad": 200, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Chuleta Ahumada (Magra)", "cantidad": 120, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Zanahoria y Papa (cubitos)", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Arroz Blanco", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Ensalada Fresca (Lado)", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"}
-            ],
-            "instrucciones": "1. Guisar lentejas con verduras.\n2. Dorar chuleta en su propia grasa (retirar excesos).\n3. Acompañar con porción pequeña de arroz."
-        },
-        {
-            "nombre": "Estofado de Pollo Casero",
-            "descripcion": "Reconfortante y fácil de hacer en cantidad.",
-            "imagen": "estofado",
-            "ingredientes": [
-                {"item": "Presa de Pollo (Sin piel)", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Papa Sancochada", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Zanahoria / Arvejas", "cantidad": 60, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Salsa de Tomate Natural", "cantidad": 50, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Hongos y Laurel", "cantidad": 5, "unidad": "g", "pasillo": "🥫 Abarrotes"}
-            ],
-            "instrucciones": "1. Sellar pollo.\n2. Hacer aderezo rojo.\n3. Cocinar todo junto con las verduras hasta que la papa esté lista."
-        },
-        {
-            "nombre": "Carne Molida con Vegetales (A la Jardinera)",
-            "descripcion": "Muy rendidora para batch cooking.",
-            "imagen": "molida_vegetales",
-            "ingredientes": [
-                {"item": "Carne Molida Especial", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Zanahoria/Vainitas/Choclo", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Papa en cuadritos", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Arroz", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"}
-            ],
-            "instrucciones": "1. Sofreír carne molida.\n2. Agregar verduras picadas chiquitas.\n3. Cocinar tapado para que suelte jugo."
-        },
-        {
-            "nombre": "Seco de Pollo con Quinua",
-            "descripcion": "Salsa verde de cilantro, reemplazando arroz con quinua.",
-            "imagen": "seco_pollo",
-            "ingredientes": [
-                {"item": "Pollo (Presa)", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Culantro Licuado", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Arvejas y Zanahoria", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Quinua Cocida", "cantidad": 120, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Zapallo Loche (Rallado)", "cantidad": 20, "unidad": "g", "pasillo": "🥦 Verdulería"}
-            ],
-            "instrucciones": "1. Macerar pollo en culantro.\n2. Cocinar a fuego lento con zapallo loche para espesar sin harina."
+            "instrucciones": "1. Aderezo de ají panca.\n2. Cocinar papa seca con caldo.\n3. Agregar carne y maní al final."
         },
         {
             "nombre": "Ají de Pollo Saludable",
-            "descripcion": "Usamos leche light y quinua o pan integral para espesar.",
-            "imagen": "aji_pollo",
+            "descripcion": "Espesado con quinua o pan integral y leche light.",
             "ingredientes": [
                 {"item": "Pechuga Deshilachada", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Crema de Ají Amarillo", "cantidad": 30, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Leche Gloria Light", "cantidad": 50, "unidad": "ml", "pasillo": "🥛 Lácteos"},
-                {"item": "Pan Integral (para espesar)", "cantidad": 20, "unidad": "g", "pasillo": "🍞 Panadería"},
-                {"item": "Pecan, Huevo, Aceituna", "cantidad": 30, "unidad": "g", "pasillo": "🥫 Abarrotes"}
+                {"item": "Crema Ají Amarillo", "cantidad": 30, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Leche Light", "cantidad": 50, "unidad": "ml", "pasillo": "🥛 Lácteos"},
+                {"item": "Quinua Cocida (Espesar)", "cantidad": 50, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Pecan/Huevo/Aceituna", "cantidad": 30, "unidad": "g", "pasillo": "🥫 Abarrotes"}
             ],
-            "instrucciones": "1. Hacer aderezo de ají.\n2. Licuar pan remojado en leche light.\n3. Mezclar con pollo."
+            "instrucciones": "1. Aderezo amarillo.\n2. Licuar quinua/pan con leche.\n3. Mezclar con pollo."
         },
         {
-            "nombre": "Caigua Rellena de Carne",
-            "descripcion": "Bajo en carbohidratos, alto en volumen.",
-            "imagen": "caigua",
+            "nombre": "Aguadito de Pollo",
+            "descripcion": "Sopa espesa, reconfortante y llena de verduras.",
+            "ingredientes": [
+                {"item": "Presa de Pollo", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"},
+                {"item": "Arroz", "cantidad": 60, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Culantro Licuado", "cantidad": 40, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Zapallo/Zanahoria/Pimiento", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Arvejas", "cantidad": 30, "unidad": "g", "pasillo": "🥦 Verdulería"}
+            ],
+            "instrucciones": "1. Base de aguadito (culantro).\n2. Hervir pollo y arroz.\n3. Agregar verduras al final."
+        },
+        {
+            "nombre": "Picante de Quinua con Carne",
+            "descripcion": "Guiso potente de quinua con ají panca.",
+            "ingredientes": [
+                {"item": "Quinua Perlada (Cruda)", "cantidad": 60, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Carne Picada/Molida", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"},
+                {"item": "Ají Panca", "cantidad": 15, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Queso Fresco", "cantidad": 30, "unidad": "g", "pasillo": "🧀 Charcutería"},
+                {"item": "Papa (Cubos)", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"}
+            ],
+            "instrucciones": "1. Aderezo rojo.\n2. Cocinar quinua y papa con caldo.\n3. Agregar carne y queso."
+        },
+        # --- GRANOS Y LEGUMBRES ---
+        {
+            "nombre": "Lentejas con Chuleta Ahumada",
+            "descripcion": "Retirar grasa visible de la chuleta.",
+            "ingredientes": [
+                {"item": "Lentejas Guisadas", "cantidad": 200, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Chuleta Ahumada (Magra)", "cantidad": 120, "unidad": "g", "pasillo": "🥩 Carnicería"},
+                {"item": "Ensalada Fresca", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Arroz Blanco", "cantidad": 60, "unidad": "g", "pasillo": "🥫 Abarrotes"}
+            ],
+            "instrucciones": "1. Lentejas guisadas clásicas.\n2. Dorar chuleta.\n3. Servir con porción controlada de arroz."
+        },
+        {
+            "nombre": "Pabellón Criollo Fit",
+            "descripcion": "Carne mechada, caraotas, arroz y plátano al horno.",
+            "ingredientes": [
+                {"item": "Carne Mechada", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"},
+                {"item": "Caraotas Negras", "cantidad": 100, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Arroz Integral", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Plátano Maduro (Horno)", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"}
+            ],
+            "instrucciones": "1. Carne sudada con tomate.\n2. Caraotas sin azúcar.\n3. Plátano en Airfryer/Horno."
+        },
+        # --- VEGETALES RELLENOS / AL HORNO ---
+        {
+            "nombre": "Berenjenas Rellenas de Carne",
+            "descripcion": "Bajo en carbohidratos, alto volumen.",
+            "ingredientes": [
+                {"item": "Berenjena Grande", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Carne Molida", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"},
+                {"item": "Pasta de Tomate", "cantidad": 30, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Queso Mozzarella", "cantidad": 30, "unidad": "g", "pasillo": "🧀 Charcutería"}
+            ],
+            "instrucciones": "1. Vaciar berenjena y picar pulpa.\n2. Sofreír carne con pulpa.\n3. Rellenar y gratinar."
+        },
+        {
+            "nombre": "Calabacines (Zapallito) Rellenos",
+            "descripcion": "Similar a la berenjena pero más suave.",
+            "ingredientes": [
+                {"item": "Calabacín Italiano", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Pollo en Cubos", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"},
+                {"item": "Choclo Desgranado", "cantidad": 30, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Queso Fresco", "cantidad": 30, "unidad": "g", "pasillo": "🧀 Charcutería"}
+            ],
+            "instrucciones": "1. Hervir zapallitos 5 min.\n2. Ahuecar y rellenar con salteado de pollo.\n3. Gratinar."
+        },
+        {
+            "nombre": "Caigua Rellena",
+            "descripcion": "Clásico peruano ligero.",
             "ingredientes": [
                 {"item": "Caigua", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"},
                 {"item": "Carne Molida", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"},
                 {"item": "Huevo Duro / Pasas", "cantidad": 30, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Arroz (Guarnición)", "cantidad": 80, "unidad": "g", "pasillo": "🥫 Abarrotes"}
+                {"item": "Pan remojado (poco)", "cantidad": 10, "unidad": "g", "pasillo": "🍞 Panadería"}
             ],
-            "instrucciones": "1. Limpiar caiguas.\n2. Rellenar con carne guisada con huevo y pasas.\n3. Cocinar al vapor o en salsa."
+            "instrucciones": "1. Relleno de carne guisada.\n2. Cocinar caiguas en vapor o salsa."
+        },
+        # --- OTROS ---
+        {
+            "nombre": "Pollo al Horno con Lentejas",
+            "descripcion": "Proteína fácil al horno.",
+            "ingredientes": [
+                {"item": "Pierna con Muslo (sin piel)", "cantidad": 200, "unidad": "g", "pasillo": "🥩 Carnicería"},
+                {"item": "Lentejas Guisadas", "cantidad": 150, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Ensalada Rusa (Yogurt)", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Limón/Orégano", "cantidad": 5, "unidad": "g", "pasillo": "🥫 Abarrotes"}
+            ],
+            "instrucciones": "1. Marinar pollo y hornear 45 min.\n2. Servir con lentejas."
         },
         {
-            "nombre": "Adobo de Cerdo (Lomo)",
-            "descripcion": "Usar parte magra del chancho. Mucho sabor.",
-            "imagen": "adobo",
+            "nombre": "Chaufa de Quinua",
+            "descripcion": "Fusión chifa usando quinua.",
+            "ingredientes": [
+                {"item": "Quinua Cocida", "cantidad": 150, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Pollo/Chancho (Cubos)", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"},
+                {"item": "Huevo (Tortilla)", "cantidad": 1, "unidad": "und", "pasillo": "🥛 Lácteos"},
+                {"item": "Cebolla China/Kion", "cantidad": 30, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Sillao", "cantidad": 10, "unidad": "ml", "pasillo": "🥫 Abarrotes"}
+            ],
+            "instrucciones": "1. Saltear carnes.\n2. Agregar quinua y tortilla picada.\n3. Sazonar con sillao."
+        },
+        {
+            "nombre": "Adobo de Chancho",
+            "descripcion": "Lomo de cerdo marinado.",
             "ingredientes": [
                 {"item": "Lomo de Cerdo", "cantidad": 180, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Ají Panca / Vinagre", "cantidad": 20, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Ají Panca/Vinagre", "cantidad": 20, "unidad": "g", "pasillo": "🥫 Abarrotes"},
                 {"item": "Camote Sancochado", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Cebolla Roja (Gruesa)", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"}
+                {"item": "Cebolla (Pluma)", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"}
             ],
-            "instrucciones": "1. Marinar cerdo desde la noche anterior.\n2. Cocinar a fuego fuerte.\n3. Servir con camote."
+            "instrucciones": "1. Marinar cerdo noche anterior.\n2. Sudar con cebolla.\n3. Acompañar con camote."
         }
     ],
+
     "Cenas": [
+        # --- CREMAS Y SOPAS ---
         {
             "nombre": "Crema de Zapallo con Pollo",
-            "descripcion": "La cena estrella. Ligera y nutritiva.",
-            "imagen": "crema_zapallo",
+            "descripcion": "Ligera y digestiva. Espesada con papa.",
             "ingredientes": [
                 {"item": "Zapallo Macre", "cantidad": 250, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Pechuga Pollo (Trozo o Desme.)", "cantidad": 120, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Papa Amarilla (Espesante)", "cantidad": 40, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Pechuga Pollo (Desmechada)", "cantidad": 100, "unidad": "g", "pasillo": "🥩 Carnicería"},
+                {"item": "Papa Amarilla", "cantidad": 40, "unidad": "g", "pasillo": "🥦 Verdulería"},
                 {"item": "Leche Light", "cantidad": 30, "unidad": "ml", "pasillo": "🥛 Lácteos"},
-                {"item": "Queso Fresco (Cubo)", "cantidad": 20, "unidad": "g", "pasillo": "🧀 Charcutería"}
+                {"item": "Queso Fresco (Topping)", "cantidad": 20, "unidad": "g", "pasillo": "🧀 Charcutería"}
             ],
-            "instrucciones": "1. Hervir zapallo y papa. Licuar con leche.\n2. Agregar el pollo cocido y trozos de queso al final."
+            "instrucciones": "1. Hervir zapallo y papa. Licuar con leche.\n2. Servir con pollo y queso."
         },
         {
-            "nombre": "Tortilla de Espinacas y Vegetales",
-            "descripcion": "Cena Low-Carb para cerrar el día.",
-            "imagen": "tortilla_espinaca",
+            "nombre": "Sopa de Menudencias",
+            "descripcion": "Aprovechando el pollo entero. Alta en colágeno.",
+            "ingredientes": [
+                {"item": "Menudencia (Hígado/Molleja)", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"},
+                {"item": "Fideo Cabello Ángel", "cantidad": 25, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Zapallo/Apio/Zanahoria", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Kion (Jengibre)", "cantidad": 5, "unidad": "g", "pasillo": "🥦 Verdulería"}
+            ],
+            "instrucciones": "1. Hervir menudencias y kion.\n2. Agregar verduras picadas.\n3. Fideos al final."
+        },
+        # --- ENSALADAS Y HUEVOS ---
+        {
+            "nombre": "Tortilla de Espinacas",
+            "descripcion": "Cena rápida low-carb.",
             "ingredientes": [
                 {"item": "Huevos (2 claras 1 yema)", "cantidad": 3, "unidad": "und", "pasillo": "🥛 Lácteos"},
-                {"item": "Espinaca Picada", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Champiñones/Pimiento", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Queso Fresco Rallado", "cantidad": 30, "unidad": "g", "pasillo": "🧀 Charcutería"}
+                {"item": "Espinaca", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Queso Fresco", "cantidad": 30, "unidad": "g", "pasillo": "🧀 Charcutería"},
+                {"item": "Champiñones (Opcional)", "cantidad": 30, "unidad": "g", "pasillo": "🥦 Verdulería"}
             ],
-            "instrucciones": "1. Saltear vegetales.\n2. Batir huevos y verter sobre vegetales.\n3. Cocinar tapado a fuego lento."
+            "instrucciones": "1. Saltear espinaca.\n2. Batir huevos y agregar.\n3. Cuajar en sartén."
         },
         {
-            "nombre": "Pan Árabe Pizza Fit",
-            "descripcion": "Mata el antojo de pizza de forma saludable.",
-            "imagen": "pizza_arabe",
+            "nombre": "Torrejas de Coliflor",
+            "descripcion": "Manera deliciosa de comer vegetales.",
             "ingredientes": [
-                {"item": "Pan Árabe Delgado", "cantidad": 1, "unidad": "und", "pasillo": "🍞 Panadería"},
-                {"item": "Pasta de Tomate", "cantidad": 20, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Queso Mozzarella/Fresco", "cantidad": 40, "unidad": "g", "pasillo": "🧀 Charcutería"},
-                {"item": "Jamón de Pavo", "cantidad": 30, "unidad": "g", "pasillo": "🧀 Charcutería"},
-                {"item": "Orégano", "cantidad": 2, "unidad": "g", "pasillo": "🥫 Abarrotes"}
+                {"item": "Coliflor (Hervida/Picada)", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Huevo", "cantidad": 2, "unidad": "und", "pasillo": "🥛 Lácteos"},
+                {"item": "Harina/Avena (Ligante)", "cantidad": 20, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Cebollita China", "cantidad": 10, "unidad": "g", "pasillo": "🥦 Verdulería"}
             ],
-            "instrucciones": "1. Armar la pizza sobre el pan.\n2. Llevar al horno o sartén tapada hasta derretir queso."
+            "instrucciones": "1. Mezclar coliflor picada con huevo y harina.\n2. Freír en sartén con poco aceite (o Airfryer)."
+        },
+        {
+            "nombre": "Ensalada Rusa con Pollo (Fit)",
+            "descripcion": "Beterraga y zanahoria con dressing de yogurt.",
+            "ingredientes": [
+                {"item": "Pechuga Plancha", "cantidad": 120, "unidad": "g", "pasillo": "🥩 Carnicería"},
+                {"item": "Beterraga (Cubos)", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Zanahoria/Vainita", "cantidad": 80, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Yogurt Griego (Aderezo)", "cantidad": 30, "unidad": "g", "pasillo": "🥛 Lácteos"}
+            ],
+            "instrucciones": "1. Mezclar verduras cocidas con yogurt, sal y limón.\n2. Acompañar con el pollo."
         },
         {
             "nombre": "Ensalada de Atún Vakimu",
-            "descripcion": "Fresca, alta en proteína.",
-            "imagen": "ensalada_atun",
+            "descripcion": "Fresco y rápido.",
             "ingredientes": [
                 {"item": "Atún en Agua", "cantidad": 120, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Yogurt Griego (Aderezo)", "cantidad": 30, "unidad": "g", "pasillo": "🥛 Lácteos"},
-                {"item": "Lechuga/Tomate/Pepino", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Choclo Desgranado", "cantidad": 30, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Lechuga/Pepino/Tomate", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Yogurt Griego", "cantidad": 30, "unidad": "g", "pasillo": "🥛 Lácteos"},
                 {"item": "Palta", "cantidad": 40, "unidad": "g", "pasillo": "🥦 Verdulería"}
             ],
-            "instrucciones": "1. Mezclar todo en un bowl grande."
+            "instrucciones": "1. Mezclar todo en un bowl."
         },
+        # --- WRAPS Y OTROS ---
         {
-            "nombre": "Pollo a la Plancha con Ensalada Rusa",
-            "descripcion": "Versión ligera de la rusa con yogurt.",
-            "imagen": "pollo_rusa",
+            "nombre": "Pan Árabe Pizza",
+            "descripcion": "Mata el antojo.",
             "ingredientes": [
-                {"item": "Filete de Pechuga", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Beterraga y Zanahoria (Cubos)", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Vainitas", "cantidad": 30, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Yogurt Griego (Sustituye Mayo)", "cantidad": 30, "unidad": "g", "pasillo": "🥛 Lácteos"},
-                {"item": "Papa (Poca cantidad)", "cantidad": 40, "unidad": "g", "pasillo": "🥦 Verdulería"}
+                {"item": "Pan Árabe Delgado", "cantidad": 1, "unidad": "und", "pasillo": "🍞 Panadería"},
+                {"item": "Queso Mozzarella/Fresco", "cantidad": 40, "unidad": "g", "pasillo": "🧀 Charcutería"},
+                {"item": "Jamón Pavo", "cantidad": 30, "unidad": "g", "pasillo": "🧀 Charcutería"},
+                {"item": "Pasta Tomate/Orégano", "cantidad": 20, "unidad": "g", "pasillo": "🥫 Abarrotes"}
             ],
-            "instrucciones": "1. Cocinar verduras y mezclar con yogurt, sal y limón.\n2. Planchar el pollo con orégano."
+            "instrucciones": "1. Armar pizza.\n2. Calentar hasta derretir queso."
         },
         {
-            "nombre": "Sopa de Menudencia (Sustanciosa)",
-            "descripcion": "Aprovechando lo que viene con el pollo entero.",
-            "imagen": "sopa_menudencia",
+            "nombre": "Wrap de Lechuga (Tacos)",
+            "descripcion": "Usando lechuga como tortilla.",
             "ingredientes": [
-                {"item": "Menudencia (Hígado/Molleja)", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Cabello de Ángel (Fideos)", "cantidad": 30, "unidad": "g", "pasillo": "🥫 Abarrotes"},
-                {"item": "Zapallo/Zanahoria/Apio", "cantidad": 150, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Kion (Jengibre)", "cantidad": 5, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Papa Amarilla", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"}
-            ],
-            "instrucciones": "1. Hervir menudencias con kion.\n2. Agregar verduras y al final el fideo."
-        },
-        {
-            "nombre": "Wrap de Lechuga con Carne",
-            "descripcion": "Tacos sin masa, usando lechuga.",
-            "imagen": "wrap_lechuga",
-            "ingredientes": [
-                {"item": "Carne Molida Guisada", "cantidad": 150, "unidad": "g", "pasillo": "🥩 Carnicería"},
-                {"item": "Lechuga Americana (Hojas)", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Pico de Gallo (Tomate/Cebolla)", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Carne Molida Guisada", "cantidad": 120, "unidad": "g", "pasillo": "🥩 Carnicería"},
+                {"item": "Lechuga Americana", "cantidad": 100, "unidad": "g", "pasillo": "🥦 Verdulería"},
                 {"item": "Palta", "cantidad": 30, "unidad": "g", "pasillo": "🥦 Verdulería"},
-                {"item": "Queso Rallado", "cantidad": 20, "unidad": "g", "pasillo": "🧀 Charcutería"}
+                {"item": "Pico de Gallo", "cantidad": 50, "unidad": "g", "pasillo": "🥦 Verdulería"}
             ],
-            "instrucciones": "1. Usar la hoja de lechuga como tortilla.\n2. Rellenar con carne y toppings."
+            "instrucciones": "1. Servir carne sobre hojas de lechuga.\n2. Agregar toppings."
+        },
+        {
+            "nombre": "Pastelón de Coliflor",
+            "descripcion": "Como un pastel de papa, pero de coliflor.",
+            "ingredientes": [
+                {"item": "Coliflor (Puré)", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Carne Molida (Relleno)", "cantidad": 100, "unidad": "g", "pasillo": "🥩 Carnicería"},
+                {"item": "Huevo (Para pintar)", "cantidad": 1, "unidad": "und", "pasillo": "🥛 Lácteos"},
+                {"item": "Queso Parmesano (Poco)", "cantidad": 10, "unidad": "g", "pasillo": "🧀 Charcutería"}
+            ],
+            "instrucciones": "1. Hacer puré de coliflor (sin mucha agua).\n2. Poner capa de carne y cubrir con puré.\n3. Gratinar."
+        },
+        {
+            "nombre": "Spaghetti de Calabacín con Atún",
+            "descripcion": "Zoodles bajos en calorías.",
+            "ingredientes": [
+                {"item": "Calabacín (Tiras/Espiral)", "cantidad": 200, "unidad": "g", "pasillo": "🥦 Verdulería"},
+                {"item": "Atún en Agua", "cantidad": 120, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Salsa de Tomate Casera", "cantidad": 50, "unidad": "g", "pasillo": "🥫 Abarrotes"},
+                {"item": "Aceitunas", "cantidad": 20, "unidad": "g", "pasillo": "🥫 Abarrotes"}
+            ],
+            "instrucciones": "1. Saltear calabacín 2 min.\n2. Mezclar con salsa y atún."
         }
     ]
 }
