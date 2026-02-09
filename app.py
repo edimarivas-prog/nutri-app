@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from recetas_mejoradas import RECETARIO
+from recetas import RECETARIO
 
 # --- CONFIGURACIÓN DE PÁGINA ---
 st.set_page_config(page_title="NutriPlan Pro", page_icon="💪", layout="wide")
