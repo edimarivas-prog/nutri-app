@@ -2,275 +2,277 @@ import streamlit as st
 import pandas as pd
 from recetas import RECETARIO
 
-# --- CONFIGURACIÓN ---
-st.set_page_config(page_title="NutriPlan Pro", page_icon="🥗", layout="wide")
+# --- CONFIGURACIÓN DE PÁGINA ---
+st.set_page_config(page_title="NutriPlan Pro", page_icon="💪", layout="wide")
 
-# Estilos CSS
+# Estilos para que los selectores se vean compactos
 st.markdown("""
     <style>
-    .stSelectbox label { font-weight: bold; font-size: 1.1rem; color: #4CAF50; }
-    div[data-testid="metric-container"] { background-color: #f0f2f6; border-radius: 8px; padding: 10px; }
-    .stAlert { font-weight: bold; }
+    .stSelectbox label { font-size: 0.9rem; font-weight: bold; color: #4CAF50; }
+    .block-container { padding-top: 2rem; }
+    div[data-testid="column"] { background-color: #f9f9f9; padding: 10px; border-radius: 10px; border: 1px solid #eee;}
     </style>
 """, unsafe_allow_html=True)
 
-# --- INICIALIZAR ESTADO ---
-if 'lista_compras' not in st.session_state:
-    st.session_state.lista_compras = {}
+# --- GESTIÓN DE ESTADO (MEMORIA DE LA APP) ---
+# Esto permite que la app recuerde tu menú aunque hagas clic en otros botones
+if 'menu_semanal' not in st.session_state:
+    # Inicializamos todo con la primera receta de la lista
+    st.session_state.menu_semanal = {
+        "Desayuno": [RECETARIO['Desayunos'][0]['nombre']] * 7,
+        "Cena": [RECETARIO['Cenas'][0]['nombre']] * 7
+    }
 
-# --- SIDEBAR: DATOS ---
+# --- BARRA LATERAL ---
 with st.sidebar:
-    st.header("📉 Tu Perfil")
+    st.header("⚙️ Configuración")
     p_edimar = st.number_input("Peso Edimar (kg)", 60.0, 150.0, 102.0, 0.5)
     p_carlos = st.number_input("Peso Carlos (kg)", 60.0, 150.0, 81.0, 0.5)
     
-    # Objetivo Calórico Mínimo (Para alertas)
-    min_cal_e = 1800
-    min_cal_c = 1900
-    st.caption(f"⚠️ Alerta si Edimar come < {min_cal_e} kcal")
+    st.markdown("---")
+    st.info("💡 **Tip:** Usa el botón de 'Relleno Rápido' para poner lo mismo varios días y luego edita solo el día que quieras cambiar.")
 
-# Factores de Ajuste
 f_e = p_edimar / 102.0
 f_c = p_carlos / 81.0
 
-# --- HEADER ---
-st.title("🥗 NutriPlan: Auditoría de Macros")
+st.title("💪 NutriPlan: Flexible")
 
-# --- PESTAÑAS PRINCIPALES ---
-# Reordenamos: Primero Planificar, Segundo Auditar Macros (Importante), Tercero Compras
-tabs = st.tabs(["🗓️ 1. Planificar Menú", "📊 2. Auditoría de Macros", "🛒 3. Lista de Compras", "👨‍🍳 4. Cocinar"])
+# --- PESTAÑAS ---
+tabs = st.tabs(["🗓️ Planificador", "📊 Calorías (Semáforo)", "🛒 Lista Compras", "👨‍🍳 Cocina"])
 
 # ==================================================
-# PESTAÑA 1: PLANIFICADOR (Lógica de Bloques)
+# PESTAÑA 1: PLANIFICADOR HÍBRIDO
 # ==================================================
 with tabs[0]:
-    c1, c2 = st.columns(2)
+    # --- 1. ALMUERZOS (BATCH COOKING) ---
+    st.subheader("🍛 Almuerzos (Ollas Semanales)")
+    ca1, ca2 = st.columns(2)
+    with ca1:
+        alm_1 = st.selectbox("Olla 1 (Lunes - Miércoles)", [r['nombre'] for r in RECETARIO['Almuerzos']], index=0)
+    with ca2:
+        alm_2 = st.selectbox("Olla 2 (Jueves - Viernes)", [r['nombre'] for r in RECETARIO['Almuerzos']], index=1)
     
-    with c1:
-        st.markdown("### 🍛 Almuerzos (Batch Cooking)")
-        st.info("Lógica: Olla 1 para Lun-Mié | Olla 2 para Jue-Vie")
-        alm_1 = st.selectbox("Almuerzo (Lun-Mié)", [r['nombre'] for r in RECETARIO['Almuerzos']], index=0)
-        alm_2 = st.selectbox("Almuerzo (Jue-Vie)", [r['nombre'] for r in RECETARIO['Almuerzos']], index=1)
-        st.caption("Sábados y Domingos se asume 'Libre' o 'Restos' en esta demo.")
+    st.markdown("---")
 
-    with c2:
-        st.markdown("### ☀️ Desayunos y 🌙 Cenas")
-        st.info("Lógica: Variar cada 3-4 días (No repetitivo, no diario)")
+    # --- 2. DESAYUNOS Y CENAS (HERRAMIENTA DE RELLENO) ---
+    st.subheader("☀️ Desayunos y 🌙 Cenas")
+    
+    # --- ZONA DE ACCIÓN RÁPIDA (PARA NO HACER 14 CLICS) ---
+    with st.container():
+        st.markdown("#### ⚡ Relleno Rápido (Ahorra tiempo)")
+        c_tool1, c_tool2, c_tool3 = st.columns([2, 2, 1])
         
-        col_bloque1, col_bloque2 = st.columns(2)
-        
-        with col_bloque1:
-            st.markdown("**Bloque A (Lun - Jue)**")
-            des_a = st.selectbox("Desayuno A", [r['nombre'] for r in RECETARIO['Desayunos']], index=0)
-            cen_a = st.selectbox("Cena A", [r['nombre'] for r in RECETARIO['Cenas']], index=0)
+        with c_tool1:
+            base_des = st.selectbox("Elegir Desayuno Base:", [r['nombre'] for r in RECETARIO['Desayunos']])
+        with c_tool2:
+            base_cen = st.selectbox("Elegir Cena Base:", [r['nombre'] for r in RECETARIO['Cenas']])
+        with c_tool3:
+            st.write("") # Espaciado
+            st.write("") 
+            if st.button("🚀 Aplicar a Toda la Semana"):
+                st.session_state.menu_semanal["Desayuno"] = [base_des] * 7
+                st.session_state.menu_semanal["Cena"] = [base_cen] * 7
+                st.rerun() # Recarga la página para mostrar los cambios
+
+    st.markdown("#### 📅 Ajuste Día por Día (Personaliza aquí)")
+    dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+    
+    # Usamos un grid de 7 columnas para ver la semana completa
+    cols = st.columns(7)
+    
+    for i, dia in enumerate(dias):
+        with cols[i]:
+            st.markdown(f"**{dia}**")
             
-        with col_bloque2:
-            st.markdown("**Bloque B (Vie - Dom)**")
-            des_b = st.selectbox("Desayuno B", [r['nombre'] for r in RECETARIO['Desayunos']], index=1)
-            cen_b = st.selectbox("Cena B", [r['nombre'] for r in RECETARIO['Cenas']], index=1)
+            # Buscamos el índice actual de la receta guardada en memoria
+            # Esto permite que el selector "sepa" qué está seleccionado, ya sea por el botón rápido o manual
+            try:
+                idx_d = [r['nombre'] for r in RECETARIO['Desayunos']].index(st.session_state.menu_semanal["Desayuno"][i])
+                idx_c = [r['nombre'] for r in RECETARIO['Cenas']].index(st.session_state.menu_semanal["Cena"][i])
+            except ValueError:
+                idx_d = 0
+                idx_c = 0
+
+            # Selector DESAYUNO
+            new_d = st.selectbox(
+                "Desayuno", 
+                [r['nombre'] for r in RECETARIO['Desayunos']], 
+                index=idx_d, 
+                key=f"d_sel_{i}", 
+                label_visibility="collapsed"
+            )
+            
+            # Selector CENA
+            new_c = st.selectbox(
+                "Cena", 
+                [r['nombre'] for r in RECETARIO['Cenas']], 
+                index=idx_c, 
+                key=f"c_sel_{i}", 
+                label_visibility="collapsed"
+            )
+            
+            # ACTUALIZACIÓN EN TIEMPO REAL
+            # Si el usuario cambia este selector específico, actualizamos la memoria
+            if new_d != st.session_state.menu_semanal["Desayuno"][i]:
+                st.session_state.menu_semanal["Desayuno"][i] = new_d
+                st.rerun()
+            
+            if new_c != st.session_state.menu_semanal["Cena"][i]:
+                st.session_state.menu_semanal["Cena"][i] = new_c
+                st.rerun()
 
 # ==================================================
-# PESTAÑA 2: AUDITORÍA DE MACROS (NUEVO)
+# PESTAÑA 2: AUDITORÍA DE CALORÍAS
 # ==================================================
 with tabs[1]:
-    st.header("📊 ¿Estamos comiendo suficiente?")
-    st.markdown("Aquí sumamos **Desayuno + Almuerzo + Cena** de cada día para evitar comer menos de lo necesario.")
-
-    # Función auxiliar para obtener macros de una receta
-    def get_macros(nombre, tipo):
-        # Busca en todas las listas
+    st.header("📊 Semáforo Nutricional")
+    
+    def get_macros(nombre):
         pool = RECETARIO['Almuerzos'] + RECETARIO['Desayunos'] + RECETARIO['Cenas']
         r = next((x for x in pool if x['nombre'] == nombre), None)
-        if r and 'macros' in r:
-            return r['macros']
-        return {"cal": 0, "prot": 0, "carb": 0, "fat": 0}
+        return r['macros'] if r else {"cal":0, "prot":0}
 
-    # Construimos la semana simulada
-    # Lun-Mie: Des A + Alm 1 + Cen A
-    # Jue: Des A + Alm 2 + Cen A
-    # Vie: Des B + Alm 2 + Cen B
-    # Sab-Dom: Des B + (Asumimos Alm 2 o Libre) + Cen B -> Usaremos Alm 2 para calculo aprox
-    
-    dias_audit = [
-        {"dia": "Lunes", "des": des_a, "alm": alm_1, "cen": cen_a},
-        {"dia": "Martes", "des": des_a, "alm": alm_1, "cen": cen_a},
-        {"dia": "Miércoles", "des": des_a, "alm": alm_1, "cen": cen_a},
-        {"dia": "Jueves", "des": des_a, "alm": alm_2, "cen": cen_a}, # Cambio de Olla
-        {"dia": "Viernes", "des": des_b, "alm": alm_2, "cen": cen_b}, # Cambio de Bloque
-        {"dia": "Sábado", "des": des_b, "alm": alm_2, "cen": cen_b},
-        {"dia": "Domingo", "des": des_b, "alm": alm_2, "cen": cen_b},
-    ]
+    # Construimos la estructura de la semana
+    semana_data = []
+    for i, dia in enumerate(dias):
+        # Lógica de almuerzo: Lun-Mie (alm_1), Jue-Vie (alm_2), Sab-Dom (alm_2 por defecto o sobras)
+        almuerzo_actual = alm_1 if i < 3 else alm_2
+        
+        semana_data.append({
+            "dia": dia,
+            "des": st.session_state.menu_semanal["Desayuno"][i],
+            "alm": almuerzo_actual,
+            "cen": st.session_state.menu_semanal["Cena"][i]
+        })
 
-    # Mostrar Tabla
     col_e, col_c = st.columns(2)
     
+    # AUDITORÍA EDIMAR
     with col_e:
-        st.subheader(f"👩 Edimar ({p_edimar} kg)")
-        for d in dias_audit:
-            m_d = get_macros(d['des'], 'Desayunos')
-            m_a = get_macros(d['alm'], 'Almuerzos')
-            m_c = get_macros(d['cen'], 'Cenas')
+        st.subheader("👩 Edimar (Meta ~2000-2200)")
+        for d in semana_data:
+            md = get_macros(d['des'])
+            ma = get_macros(d['alm'])
+            mc = get_macros(d['cen'])
             
-            # Suma Total Diaria ajustada al factor de Edimar
-            total_cal = (m_d['cal'] + m_a['cal'] + m_c['cal']) * f_e
-            total_prot = (m_d['prot'] + m_a['prot'] + m_c['prot']) * f_e
+            total_cal = (md['cal'] + ma['cal'] + mc['cal']) * f_e
+            total_prot = (md['prot'] + ma['prot'] + mc['prot']) * f_e
             
-            # Renderizar fila
-            with st.container(border=True):
-                c_dia, c_cal, c_prot, c_alert = st.columns([1.5, 1.5, 1.5, 3])
-                c_dia.markdown(f"**{d['dia']}**")
-                c_cal.markdown(f"{total_cal:.0f} kcal")
-                c_prot.markdown(f"prot: {total_prot:.0f}g")
-                
-                if total_cal < min_cal_e:
-                    c_alert.error(f"⚠️ Bajo ({total_cal:.0f} < {min_cal_e})")
-                elif total_cal > 2600:
-                    c_alert.warning("⚠️ Alto")
-                else:
-                    c_alert.success("✅ Rango OK")
-
+            c1, c2 = st.columns([1, 2])
+            c1.write(f"**{d['dia'][:3]}**")
+            
+            # Semáforo
+            if total_cal < 1800:
+                c2.error(f"{total_cal:.0f} kcal (Muy Bajo) 🚨")
+            elif total_cal > 2500:
+                c2.warning(f"{total_cal:.0f} kcal (Alto)")
+            else:
+                c2.success(f"{total_cal:.0f} kcal (Perfecto) ✅")
+            
+    # AUDITORÍA CARLOS
     with col_c:
-        st.subheader(f"👨 Carlos ({p_carlos} kg)")
-        for d in dias_audit:
-            m_d = get_macros(d['des'], 'Desayunos')
-            m_a = get_macros(d['alm'], 'Almuerzos')
-            m_c = get_macros(d['cen'], 'Cenas')
+        st.subheader("👨 Carlos (Meta ~2100-2400)")
+        for d in semana_data:
+            md = get_macros(d['des'])
+            ma = get_macros(d['alm'])
+            mc = get_macros(d['cen'])
             
-            # Suma Total Diaria ajustada al factor de Carlos
-            total_cal = (m_d['cal'] + m_a['cal'] + m_c['cal']) * f_c
-            total_prot = (m_d['prot'] + m_a['prot'] + m_c['prot']) * f_c
+            total_cal = (md['cal'] + ma['cal'] + mc['cal']) * f_c
+            total_prot = (md['prot'] + ma['prot'] + mc['prot']) * f_c
             
-            # Renderizar fila
-            with st.container(border=True):
-                c_dia, c_cal, c_prot, c_alert = st.columns([1.5, 1.5, 1.5, 3])
-                c_dia.markdown(f"**{d['dia']}**")
-                c_cal.markdown(f"{total_cal:.0f} kcal")
-                c_prot.markdown(f"prot: {total_prot:.0f}g")
-                
-                if total_cal < min_cal_c:
-                    c_alert.error(f"⚠️ Bajo ({total_cal:.0f} < {min_cal_c})")
-                else:
-                    c_alert.success("✅ Rango OK")
+            c1, c2 = st.columns([1, 2])
+            c1.write(f"**{d['dia'][:3]}**")
+            
+            if total_cal < 1900:
+                c2.error(f"{total_cal:.0f} kcal (Muy Bajo) 🚨")
+            else:
+                c2.success(f"{total_cal:.0f} kcal (Perfecto) ✅")
 
 # ==================================================
 # PESTAÑA 3: COMPRAS
 # ==================================================
 with tabs[2]:
-    st.header("🛒 Lista de Supermercado")
-    
-    if st.button("Generar Lista Organizada", type="primary"):
-        st.session_state.lista_compras = {} # Reiniciar
-
-        def agregar_smart(nombre_receta, dias):
+    if st.button("🛒 Generar Lista de Compras", type="primary"):
+        lista = {}
+        
+        def add_item(nombre, dias):
             pool = RECETARIO['Almuerzos'] + RECETARIO['Desayunos'] + RECETARIO['Cenas']
-            r = next((x for x in pool if x['nombre'] == nombre_receta), None)
-            
+            r = next((x for x in pool if x['nombre'] == nombre), None)
             if r:
                 for ing in r['ingredientes']:
+                    key = ing['item']
                     pasillo = ing.get('pasillo', 'Otros')
-                    item = ing['item']
-                    total = (ing['cantidad'] * f_e + ing['cantidad'] * f_c) * dias
+                    # Fórmula maestra de cantidad
+                    cant = (ing['cantidad'] * f_e + ing['cantidad'] * f_c) * dias
                     
-                    if pasillo not in st.session_state.lista_compras:
-                        st.session_state.lista_compras[pasillo] = {}
-                    if item in st.session_state.lista_compras[pasillo]:
-                        st.session_state.lista_compras[pasillo][item] += total
-                    else:
-                        st.session_state.lista_compras[pasillo][item] = total
+                    if pasillo not in lista: lista[pasillo] = {}
+                    if key not in lista[pasillo]: lista[pasillo][key] = 0
+                    lista[pasillo][key] += cant
 
-        # 1. Almuerzos
-        agregar_smart(alm_1, 3) # Lun-Mie
-        agregar_smart(alm_2, 2) # Jue-Vie
+        # 1. Sumar Almuerzos Batch
+        add_item(alm_1, 3) # Lun-Mie
+        add_item(alm_2, 4) # Jue-Dom (Asumimos que comen de esto el finde)
+
+        # 2. Sumar Desayunos y Cenas (Iterando los 7 días)
+        for d in st.session_state.menu_semanal["Desayuno"]:
+            add_item(d, 1)
+        for c in st.session_state.menu_semanal["Cena"]:
+            add_item(c, 1)
+
+        # 3. Mostrar Resultados
+        col1, col2 = st.columns(2)
+        items = sorted(list(lista.items()))
+        mitad = (len(items) // 2) + 1
         
-        # 2. Bloques A (4 días: Lun, Mar, Mie, Jue)
-        agregar_smart(des_a, 4)
-        agregar_smart(cen_a, 4)
-
-        # 3. Bloques B (3 días: Vie, Sab, Dom)
-        agregar_smart(des_b, 3)
-        agregar_smart(cen_b, 3)
-
-        # MOSTRAR
-        col_a, col_b = st.columns(2)
-        items_vista = list(st.session_state.lista_compras.items())
-        mitad = (len(items_vista) // 2) + 1
-        
-        with col_a:
-            for pasillo, items in items_vista[:mitad]:
-                with st.container(border=True):
-                    st.markdown(f"**{pasillo}**")
-                    for ingrediente, cantidad in items.items():
-                        st.checkbox(f"{ingrediente}: {cantidad:.0f}", key=f"{pasillo}_{ingrediente}")
-        with col_b:
-            for pasillo, items in items_vista[mitad:]:
-                 with st.container(border=True):
-                    st.markdown(f"**{pasillo}**")
-                    for ingrediente, cantidad in items.items():
-                        st.checkbox(f"{ingrediente}: {cantidad:.0f}", key=f"{pasillo}_{ingrediente}")
+        with col1:
+            for pasillo, prods in items[:mitad]:
+                with st.expander(pasillo, expanded=True):
+                    for p, q in prods.items(): st.checkbox(f"{p}: {q:.0f}")
+        with col2:
+            for pasillo, prods in items[mitad:]:
+                with st.expander(pasillo, expanded=True):
+                    for p, q in prods.items(): st.checkbox(f"{p}: {q:.0f}")
 
 # ==================================================
-# PESTAÑA 4: COCINA (CON MACROS DETALLADOS)
+# PESTAÑA 4: COCINA
 # ==================================================
 with tabs[3]:
-    st.header("👨‍🍳 Modo Cocina")
-    opcion = st.selectbox("¿Qué cocinas hoy?", [
-        "Olla 1 (Almuerzo Lun-Mié)", 
-        "Olla 2 (Almuerzo Jue-Vie)", 
-        "Desayuno Bloque A (Lun-Jue)",
-        "Desayuno Bloque B (Vie-Dom)",
-        "Cena Bloque A (Lun-Jue)",
-        "Cena Bloque B (Vie-Dom)"
-    ])
+    st.header("👨‍🍳 Libro de Recetas")
     
-    # Mapeo de selección a receta
-    if opcion == "Olla 1 (Almuerzo Lun-Mié)":
-        receta_nombre, dias_factor = alm_1, 3
-    elif opcion == "Olla 2 (Almuerzo Jue-Vie)":
-        receta_nombre, dias_factor = alm_2, 2
-    elif opcion == "Desayuno Bloque A (Lun-Jue)":
-        receta_nombre, dias_factor = des_a, 1
-    elif opcion == "Desayuno Bloque B (Vie-Dom)":
-        receta_nombre, dias_factor = des_b, 1
-    elif opcion == "Cena Bloque A (Lun-Jue)":
-        receta_nombre, dias_factor = cen_a, 1
-    else:
-        receta_nombre, dias_factor = cen_b, 1
-
-    pool = RECETARIO['Almuerzos'] + RECETARIO['Desayunos'] + RECETARIO['Cenas']
-    receta = next((x for x in pool if x['nombre'] == receta_nombre), None)
-
-    if receta:
-        st.markdown(f"## 📌 {receta['nombre']}")
+    col_sel, col_view = st.columns([1, 2])
+    
+    with col_sel:
+        st.markdown("**¿Qué quieres cocinar?**")
+        cat = st.selectbox("Categoría", ["Almuerzos", "Desayunos", "Cenas"])
+        plato = st.radio("Plato", [r['nombre'] for r in RECETARIO[cat]])
+    
+    with col_view:
+        pool = RECETARIO['Almuerzos'] + RECETARIO['Desayunos'] + RECETARIO['Cenas']
+        receta = next((x for x in pool if x['nombre'] == plato), None)
         
-        # --- SECCIÓN MACROS REFORZADA ---
-        st.markdown("### 🧬 Macros por Plato (Ajustado a tu peso)")
-        col_m_e, col_m_c = st.columns(2)
-        
-        m = receta.get('macros', {'cal':0, 'prot':0})
-        
-        with col_m_e:
-            st.info("👩 **Edimar**")
-            st.write(f"**Calorías:** {m['cal']*f_e:.0f} kcal")
-            st.write(f"**Proteína:** {m['prot']*f_e:.1f} g")
-
-        with col_m_c:
-            st.warning("👨 **Carlos**")
-            st.write(f"**Calorías:** {m['cal']*f_c:.0f} kcal")
-            st.write(f"**Proteína:** {m['prot']*f_c:.1f} g")
-
-        st.markdown("---")
-        st.markdown("### 🥘 Ingredientes")
-        
-        # Tabla simple
-        data = []
-        for i in receta['ingredientes']:
-            data.append({
-                "Ingrediente": i['item'],
-                "Total Olla": f"{(i['cantidad']*(f_e+f_c)*dias_factor):.0f} {i['unidad']}",
-                "Tu Plato (Edimar)": f"{(i['cantidad']*f_e):.0f}",
-                "Su Plato (Carlos)": f"{(i['cantidad']*f_c):.0f}"
-            })
-        st.table(pd.DataFrame(data))
-        
-        st.markdown("### 📝 Instrucciones")
-        st.write(receta['instrucciones'])
+        if receta:
+            st.markdown(f"## 📌 {receta['nombre']}")
+            st.markdown(f"_{receta['descripcion']}_")
+            
+            # Info Nutricional
+            m = receta['macros']
+            c1, c2, c3, c4 = st.columns(4)
+            c1.metric("Calorías Base", f"{m['cal']}")
+            c2.metric("Proteína", f"{m['prot']}g")
+            c3.metric("Carbos", f"{m['carb']}g")
+            c4.metric("Grasas", f"{m['fat']}g")
+            
+            st.divider()
+            
+            # Ingredientes Dinámicos
+            st.markdown("#### ⚖️ Cantidades (Ajustadas a tu peso)")
+            df_ing = []
+            for i in receta['ingredientes']:
+                df_ing.append({
+                    "Ingrediente": i['item'],
+                    "Edimar": f"{i['cantidad']*f_e:.0f} {i['unidad']}",
+                    "Carlos": f"{i['cantidad']*f_c:.0f} {i['unidad']}"
+                })
+            st.table(pd.DataFrame(df_ing))
+            
+            st.info(f"📝 **Instrucciones:**\n\n{receta['instrucciones']}")
