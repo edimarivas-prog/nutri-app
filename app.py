@@ -84,4 +84,29 @@ with tab3:
     if st.button("Generar Lista de Compras"):
         lista_compras = {}
 
-        def agregar_
+        def agregar_a_lista(receta_nombre, categoria, dias, personas_factor_sum):
+            receta = next(r for r in RECETARIO[categoria] if r['nombre'] == receta_nombre)
+            for ing in receta['ingredientes']:
+                # Fórmula: Cantidad Base * (Factor Edimar + Factor Carlos) * Días
+                total = ing['cantidad'] * personas_factor_sum * dias
+                item = ing['item']
+                if item in lista_compras:
+                    lista_compras[item] += total
+                else:
+                    lista_compras[item] = total
+
+        # Lógica de días (Lunes a Viernes)
+        # Asumimos que ambos comen lo mismo en desayuno y cena los 5 días
+        agregar_a_lista(desayuno_sel, "Desayunos", 5, factor_e + factor_c)
+        agregar_a_lista(cena_sel, "Cenas", 5, factor_e + factor_c)
+        
+        # Almuerzos divididos
+        agregar_a_lista(almuerzo_a_sel, "Almuerzos", 3, factor_e + factor_c) # Lun-Mie
+        agregar_a_lista(almuerzo_b_sel, "Almuerzos", 2, factor_e + factor_c) # Jue-Vie
+
+        # Mostrar lista limpia
+        df = pd.DataFrame(list(lista_compras.items()), columns=['Producto', 'Cantidad Total'])
+        df['Cantidad Total'] = df['Cantidad Total'].apply(lambda x: f"{x:.0f}")
+        st.dataframe(df, use_container_width=True)
+        
+        st.success("¡Lista generada! Captura esta pantalla y ve al mercado.")
