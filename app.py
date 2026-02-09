@@ -45,12 +45,12 @@ tabs = st.tabs(["🗓️ Planificador", "📊 Calorías (Semáforo)", "🛒 List
 # ==================================================
 with tabs[0]:
     # --- 1. ALMUERZOS (BATCH COOKING) ---
-    st.subheader("🍛 Almuerzos (Ollas Semanales)")
+    st.subheader("🍛 Almuerzos")
     ca1, ca2 = st.columns(2)
     with ca1:
-        alm_1 = st.selectbox("Olla 1 (Lunes - Miércoles)", [r['nombre'] for r in RECETARIO['Almuerzos']], index=0)
+        alm_1 = st.selectbox("Almuerzo 1 (Lunes - Miércoles)", [r['nombre'] for r in RECETARIO['Almuerzos']], index=0)
     with ca2:
-        alm_2 = st.selectbox("Olla 2 (Jueves - Viernes)", [r['nombre'] for r in RECETARIO['Almuerzos']], index=1)
+        alm_2 = st.selectbox("Almuerzo 2 (Jueves - Viernes)", [r['nombre'] for r in RECETARIO['Almuerzos']], index=1)
     
     st.markdown("---")
 
