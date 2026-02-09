@@ -252,7 +252,7 @@ with tabs[3]:
         
         if receta:
             st.markdown(f"## 📌 {receta['nombre']}")
-           st.markdown(f"_{receta.get('descripcion', 'Sin descripción disponible')}_")
+            st.markdown(f"_{receta.get('descripcion', 'Sin descripción disponible')}_")
             
             # Info Nutricional
             m = receta['macros']
