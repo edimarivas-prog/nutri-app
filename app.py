@@ -1,112 +1,135 @@
 import streamlit as st
 import pandas as pd
-from recetas import RECETARIO # Importamos tu base de datos
+from recetas import RECETARIO
 
-# --- CONFIGURACIÓN DE LA PÁGINA (Estilo App Móvil) ---
-st.set_page_config(
-    page_title="NutriApp Ven-Per",
-    page_icon="🥑",
-    layout="centered"
-)
+# --- CONFIGURACIÓN ---
+st.set_page_config(page_title="NutriApp Ven-Per", page_icon="🥑", layout="wide")
 
-# --- 1. BARRA LATERAL: DATOS BIOMÉTRICOS ---
-st.sidebar.header("⚙️ Configuración Personal")
-st.sidebar.write("Actualiza tu peso aquí cada semana.")
+# --- BARRA LATERAL (DATOS) ---
+st.sidebar.header("⚙️ Tus Datos")
+peso_edimar = st.sidebar.number_input("Peso Edimar (kg)", 102.0, step=0.5)
+peso_carlos = st.sidebar.number_input("Peso Carlos (kg)", 81.0, step=0.5)
 
-# Pesos Base (Punto de partida enero 2026)
-BASE_EDIMAR = 102.0
-BASE_CARLOS = 81.0
+# Factores de ajuste (Base 2000kcal aprox)
+# Edimar: Base 102kg | Carlos: Base 81kg
+factor_e = peso_edimar / 102.0
+factor_c = peso_carlos / 81.0
 
-# Entradas de usuario
-peso_edimar = st.sidebar.number_input("Peso Edimar (kg):", value=102.0, step=0.5)
-peso_carlos = st.sidebar.number_input("Peso Carlos (kg):", value=81.0, step=0.5)
-
-# --- 2. MOTOR DE CÁLCULO (EL ALGORITMO) ---
-def calcular_factor(peso_actual, peso_base):
-    # Si bajan de peso, las porciones bajan proporcionalmente para seguir perdiendo
-    # Si el peso es igual al base, el factor es 1.0
-    return peso_actual / peso_base
-
-factor_e = calcular_factor(peso_edimar, BASE_EDIMAR)
-factor_c = calcular_factor(peso_carlos, BASE_CARLOS)
-
-# --- 3. INTERFAZ PRINCIPAL ---
 st.title("🥑 Planificador Semanal")
-st.write(f"**Objetivo:** Déficit calórico activo.")
 
-# Pestañas para organizar la vista en celular
-tab1, tab2, tab3 = st.tabs(["📅 Menú", "🥣 Porciones", "🛒 Lista de Compras"])
+# --- PESTAÑAS PRINCIPALES ---
+tab_plan, tab_cocina, tab_recetario = st.tabs(["📋 Planificador", "🍳 Cocina y Porciones", "📖 Recetario Paso a Paso"])
 
-with tab1:
-    st.header("Diseña tu Semana")
-    
-    # Selectores de Recetas
-    desayuno_sel = st.selectbox("🍳 Desayunos (Carlos):", [r['nombre'] for r in RECETARIO['Desayunos']])
-    
-    st.subheader("🍛 Almuerzos (Batch Cooking)")
+# ==========================================
+# 1. PESTAÑA: PLANIFICADOR (DOMINGO)
+# ==========================================
+with tab_plan:
+    st.markdown("### 1. Elige tus Almuerzos (Batch Cooking)")
     col1, col2 = st.columns(2)
     with col1:
-        almuerzo_a_sel = st.selectbox("Lote A (Lun-Mar-Mié):", [r['nombre'] for r in RECETARIO['Almuerzos']], index=0)
+        almuerzo_3_dias = st.selectbox("Almuerzo Largo (Para 3 días):", [r['nombre'] for r in RECETARIO['Almuerzos']], index=0)
     with col2:
-        almuerzo_b_sel = st.selectbox("Lote B (Jue-Vie):", [r['nombre'] for r in RECETARIO['Almuerzos']], index=1)
-        
-    cena_sel = st.selectbox("🌙 Cenas (Edimar):", [r['nombre'] for r in RECETARIO['Cenas']])
+        almuerzo_2_dias = st.selectbox("Almuerzo Corto (Para 2 días):", [r['nombre'] for r in RECETARIO['Almuerzos']], index=1)
 
-with tab2:
-    st.header("Tus Cantidades Exactas")
+    st.markdown("---")
+    st.markdown("### 2. Elige Desayunos y Cenas (Día a día)")
     
-    def mostrar_detalle(titulo, receta_nombre, categoria, factor, usuario):
-        # Buscar la receta completa en la base de datos
-        receta = next(r for r in RECETARIO[categoria] if r['nombre'] == receta_nombre)
-        
-        with st.expander(f"{titulo}: {receta_nombre} ({usuario})"):
-            st.write(f"_{receta['descripcion']}_")
-            for ing in receta['ingredientes']:
-                # LA MAGIA: Ajuste dinámico
-                cantidad_ajustada = round(ing['cantidad'] * factor)
-                st.write(f"- **{ing['item']}**: {cantidad_ajustada} {ing['unidad']}")
-            st.caption(f"📝 {receta.get('instrucciones', '')}")
-
-    st.subheader("👩 Para Edimar")
-    mostrar_detalle("Desayuno", desayuno_sel, "Desayunos", factor_e, "Edimar")
-    mostrar_detalle("Almuerzo A", almuerzo_a_sel, "Almuerzos", factor_e, "Edimar")
-    mostrar_detalle("Cena", cena_sel, "Cenas", factor_e, "Edimar")
-
-    st.subheader("👨 Para Carlos")
-    mostrar_detalle("Desayuno", desayuno_sel, "Desayunos", factor_c, "Carlos")
-    mostrar_detalle("Almuerzo B", almuerzo_b_sel, "Almuerzos", factor_c, "Carlos")
-    mostrar_detalle("Cena", cena_sel, "Cenas", factor_c, "Carlos")
-
-with tab3:
-    st.header("🛒 Lista de Supermercado")
-    st.caption("Calculada para: 5 días de Desayuno/Cena + 3 días Almuerzo A + 2 días Almuerzo B")
+    dias_semana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
     
-    if st.button("Generar Lista de Compras"):
-        lista_compras = {}
+    # Creamos diccionarios para guardar las elecciones
+    elecciones_desayuno = {}
+    elecciones_cena = {}
 
-        def agregar_a_lista(receta_nombre, categoria, dias, personas_factor_sum):
-            receta = next(r for r in RECETARIO[categoria] if r['nombre'] == receta_nombre)
+    # Usamos columnas para que no sea una lista eterna hacia abajo
+    c1, c2 = st.columns(2)
+    
+    for i, dia in enumerate(dias_semana):
+        # Desayunos en columna 1
+        with c1:
+            elecciones_desayuno[dia] = st.selectbox(f"Desayuno {dia}", [r['nombre'] for r in RECETARIO['Desayunos']], key=f"des_{i}")
+        # Cenas en columna 2
+        with c2:
+            elecciones_cena[dia] = st.selectbox(f"Cena {dia}", [r['nombre'] for r in RECETARIO['Cenas']], key=f"cen_{i}")
+
+# ==========================================
+# 2. PESTAÑA: COCINA Y COMPRAS
+# ==========================================
+with tab_cocina:
+    st.info("Aquí ves cuánto cocinar en TOTAL (para la olla) y cuánto servir en CADA PLATO.")
+
+    # --- FUNCIÓN MAESTRA DE CÁLCULO ---
+    def mostrar_bloque_cocina(titulo, receta_nombre, dias_duracion):
+        receta = next(r for r in RECETARIO['Almuerzos'] + RECETARIO['Desayunos'] + RECETARIO['Cenas'] if r['nombre'] == receta_nombre)
+        
+        with st.expander(f"🔥 {titulo}: {receta_nombre} ({dias_duracion} días)", expanded=True):
+            st.markdown(f"**Ingredientes Totales a Cocinar** (Suma de Edimar + Carlos por {dias_duracion} días):")
+            
             for ing in receta['ingredientes']:
-                # Fórmula: Cantidad Base * (Factor Edimar + Factor Carlos) * Días
-                total = ing['cantidad'] * personas_factor_sum * dias
-                item = ing['item']
-                if item in lista_compras:
-                    lista_compras[item] += total
+                # 1. Calculamos la porción individual ajustada al peso
+                qty_e = ing['cantidad'] * factor_e
+                qty_c = ing['cantidad'] * factor_c
+                
+                # 2. Sumamos lo que comen ambos en un día
+                total_diario = qty_e + qty_c
+                
+                # 3. Multiplicamos por los días que van a comer eso
+                total_batch = total_diario * dias_duracion
+                
+                # Mostramos la fila
+                st.write(f"- 🥘 **Olla Total:** {total_batch:.0f} {ing['unidad']} de {ing['item']}")
+                st.caption(f"   ↳ 🍽️ Al emplatar: Edimar **{qty_e:.0f}{ing['unidad']}** | Carlos **{qty_c:.0f}{ing['unidad']}**")
+
+    # MOSTRAR ALMUERZOS
+    st.subheader("🍛 Preparación de Almuerzos")
+    mostrar_bloque_cocina("Almuerzo Largo", almuerzo_3_dias, 3)
+    mostrar_bloque_cocina("Almuerzo Corto", almuerzo_2_dias, 2)
+
+    st.markdown("---")
+    
+    # LISTA DE COMPRAS (Agregada al final de esta pestaña)
+    st.subheader("🛒 Lista de Compras Total")
+    if st.button("Generar Lista de Supermercado"):
+        lista_final = {}
+
+        def sumar_al_carrito(nombre, dias):
+            receta = next(r for r in RECETARIO['Almuerzos'] + RECETARIO['Desayunos'] + RECETARIO['Cenas'] if r['nombre'] == nombre)
+            for ing in receta['ingredientes']:
+                qty_e = ing['cantidad'] * factor_e
+                qty_c = ing['cantidad'] * factor_c
+                total = (qty_e + qty_c) * dias
+                
+                if ing['item'] in lista_final:
+                    lista_final[ing['item']] += total
                 else:
-                    lista_compras[item] = total
+                    lista_final[ing['item']] = total
 
-        # Lógica de días (Lunes a Viernes)
-        # Asumimos que ambos comen lo mismo en desayuno y cena los 5 días
-        agregar_a_lista(desayuno_sel, "Desayunos", 5, factor_e + factor_c)
-        agregar_a_lista(cena_sel, "Cenas", 5, factor_e + factor_c)
+        # Sumar Almuerzos
+        sumar_al_carrito(almuerzo_3_dias, 3)
+        sumar_al_carrito(almuerzo_2_dias, 2)
         
-        # Almuerzos divididos
-        agregar_a_lista(almuerzo_a_sel, "Almuerzos", 3, factor_e + factor_c) # Lun-Mie
-        agregar_a_lista(almuerzo_b_sel, "Almuerzos", 2, factor_e + factor_c) # Jue-Vie
+        # Sumar Desayunos y Cenas (Uno por uno según selección)
+        for dia in dias_semana:
+            sumar_al_carrito(elecciones_desayuno[dia], 1)
+            sumar_al_carrito(elecciones_cena[dia], 1)
 
-        # Mostrar lista limpia
-        df = pd.DataFrame(list(lista_compras.items()), columns=['Producto', 'Cantidad Total'])
-        df['Cantidad Total'] = df['Cantidad Total'].apply(lambda x: f"{x:.0f}")
+        # Mostrar Tabla
+        df = pd.DataFrame(list(lista_final.items()), columns=['Ingrediente', 'Cantidad Total'])
         st.dataframe(df, use_container_width=True)
-        
-        st.success("¡Lista generada! Captura esta pantalla y ve al mercado.")
+
+# ==========================================
+# 3. PESTAÑA: RECETARIO (LIBRO DE COCINA)
+# ==========================================
+with tab_recetario:
+    st.header("📖 Tu Libro de Cocina")
+    
+    filtro = st.selectbox("Ver categoría:", ["Desayunos", "Almuerzos", "Cenas"])
+    
+    for receta in RECETARIO[filtro]:
+        with st.expander(f"📌 {receta['nombre']}"):
+            st.write(f"_{receta['descripcion']}_")
+            st.markdown("**Ingredientes Base:**")
+            for ing in receta['ingredientes']:
+                st.write(f"- {ing['item']}")
+            
+            st.markdown("**👨‍🍳 Paso a Paso:**")
+            st.write(receta.get('instrucciones', 'No hay instrucciones detalladas aún.'))
